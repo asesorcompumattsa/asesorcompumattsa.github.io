@@ -20,8 +20,8 @@ var TEMA = "";
 var TEMAS = {
   halloween: { emojis:["🎃","🦇","👻"], badge:"🎃 Feliz Halloween" },
   navidad:   { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
-  cancer_mama: { emojis:["🎗️"], badge:"🎗️ Octubre Rosa — Día del Cáncer de Mama" }
-   dia_muertos: { emojis:["💀","🌷","🕯️"], badge:"💀 Día de Muertos" }
+  cancer_mama: { emojis:["🎗️"], badge:"🎗️ Octubre Rosa — Día del Cáncer de Mama" },
+   dia_muertos: { emojis:["💀","🌷","🕯️"], badge:"💀 Día de Muertos" },
 };
 
 /* ──────────────────────────────────────────────────────────────────
