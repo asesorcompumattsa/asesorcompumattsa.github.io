@@ -15,7 +15,7 @@
    Para sumar una fecha nueva (ej. día del cáncer de mama), agregá
    una entrada más al objeto TEMAS de abajo con sus propios emojis.
 ──────────────────────────────────────────────────────────────────── */
-var TEMA = "dia_muertos";
+var TEMA = "cancer_mama";
 
 var TEMAS = {
   halloween: { emojis:["🎃","🦇","👻"], badge:"🎃 Feliz Halloween" },
