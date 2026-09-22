@@ -17,7 +17,7 @@
    arriba del "Asesor de ventas" en vez de caer por la pantalla,
    agregale  modo:"brinca"  a esa entrada (mirá "diamuertos" abajo).
 ──────────────────────────────────────────────────────────────────── */
-var TEMA = "diamuertos";
+var TEMAS = "diamuertos";
 
 var TEMAS = {
   halloween:   { emojis:["🎃","🦇","👻"], badge:"🎃 Feliz Halloween" },
