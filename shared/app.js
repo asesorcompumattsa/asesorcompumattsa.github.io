@@ -1,327 +1,500 @@
-/* ══════════════════════════════════════════════════════════════════
-   COMPUMATT — MOTOR COMPARTIDO (usado por TODAS las tarjetas de
-   vendedores). No hay datos de ningún vendedor aquí — esos van en
-   el archivo de cada vendedor (NOMBRE, NOMBRE_COMPLETO, ROL, TEL, WA).
+:root{
+    --navy:#0B1F3A;
+    --navy2:#0E2A52;
+    --blue:#1477D6;
+    --blue-light:#29B6F6;
+    --cyan:#5FD4F4;
+    --red:#EE2E2E;
+    --paper:#F3F7FC;
+    --slate:#5B6B82;
+    --line: rgba(11,31,58,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--paper);
+    font-family:'Inter', sans-serif;
+    color: var(--navy);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 28px 16px;
+  }
+  .card{
+    width:100%;
+    max-width:400px;
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow: 0 1px 2px rgba(11,31,58,0.06), 0 20px 40px -18px rgba(11,31,58,0.28);
+    border:1px solid var(--line);
+    animation: rise .6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes rise{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  /* ═══════════ CATÁLOGO ═══════════ */
+  .cat-overlay{
+    position:fixed;inset:0;
+    background:rgba(11,31,58,.6);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    display:flex;align-items:flex-end;justify-content:center;
+    z-index:9999;opacity:0;pointer-events:none;
+    transition:opacity .3s;
+  }
+  .cat-overlay.show{opacity:1;pointer-events:all;}
+  .cat-drawer{
+    width:100%;max-width:500px;
+    background:#f4f6fb;
+    border-radius:24px 24px 0 0;
+    height:92vh;
+    display:flex;flex-direction:column;
+    transform:translateY(60px);
+    transition:transform .38s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 -12px 50px rgba(11,31,58,.25);
+  }
+  .cat-overlay.show .cat-drawer{transform:translateY(0);}
+  .cat-handle{width:44px;height:4px;border-radius:4px;background:#cbd5e1;margin:12px auto 0;flex-shrink:0;}
+  .cat-head{
+    padding:12px 18px 8px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .cat-head h2{font-size:17px;font-weight:800;color:#0b1f3a;margin:0;font-family:'Space Grotesk',sans-serif;}
+  .cat-close{
+    width:30px;height:30px;border-radius:50%;background:#e2e8f0;
+    border:none;cursor:pointer;font-size:15px;
+    display:flex;align-items:center;justify-content:center;color:#64748b;
+  }
+  .cat-search-w{padding:0 14px 8px;flex-shrink:0;}
+  .cat-search-w input{
+    width:100%;padding:9px 14px;border:none;border-radius:12px;
+    font-size:13px;outline:none;background:#fff;
+    box-shadow:0 2px 8px rgba(11,31,58,.08);
+    font-family:'Inter',sans-serif;
+  }
+  .cat-tabs{
+    display:flex;gap:6px;padding:2px 14px 8px;
+    overflow-x:auto;flex-shrink:0;scrollbar-width:none;
+  }
+  .cat-tabs::-webkit-scrollbar{display:none;}
+  .cat-tab{
+    white-space:nowrap;padding:6px 14px;border-radius:20px;
+    border:none;background:#fff;font-size:11.5px;font-weight:700;
+    color:#64748b;cursor:pointer;box-shadow:0 1px 4px rgba(11,31,58,.1);
+    flex-shrink:0;transition:.18s;
+  }
+  .cat-tab.active{background:#1477d6;color:#fff;box-shadow:0 3px 10px rgba(20,119,214,.3);}
+  .cat-grid{
+    overflow-y:auto;
+    flex:1;
+    padding:12px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    align-content:start;
+  }
+  .prod-card{
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 2px 10px rgba(11,31,58,.1);
+    cursor:pointer;
+    overflow:hidden;
+    height:230px;
+  }
+  .prod-card:active{opacity:.85;}
+  .prod-img-w{
+    width:100%;
+    height:140px;
+    background:#f0f4f8;
+    overflow:hidden;
+    position:relative;
+  }
+  .prod-img-w img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .prod-ph{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+  }
+  .prod-bdg-w{position:absolute;top:6px;left:6px;}
+  .prod-bdg{
+    font-size:9px;font-weight:800;
+    padding:3px 7px;border-radius:20px;
+    text-transform:uppercase;
+  }
+  .prod-bdg.nuevo {background:#d1fae5;color:#065f46;}
+  .prod-bdg.oferta{background:#fef3c7;color:#78350f;}
+  .prod-bdg.agotado{background:#fee2e2;color:#7f1d1d;}
+  .prod-body{
+    padding:8px 9px;
+    height:90px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .prod-name{
+    font-size:11px;
+    font-weight:700;
+    color:#0b1f3a;
+    line-height:1.25;
+    margin:0;
+    max-height:36px;
+    overflow:hidden;
+  }
+  .prod-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .prod-price{
+    font-size:13px;
+    font-weight:800;
+    color:#1477d6;
+    white-space:nowrap;
+  }
+  .prod-wa{
+    background:#25D366;
+    color:#fff;
+    border:none;
+    border-radius:7px;
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    cursor:pointer;
+    text-decoration:none;
+    flex-shrink:0;
+  }
+  .prod-agotado{font-size:10px;font-weight:700;color:#dc2626;}
+  .cat-loading{
+    grid-column:1/-1;display:flex;flex-direction:column;
+    align-items:center;gap:12px;padding:50px 20px;
+  }
+  .cat-spinner{
+    width:36px;height:36px;border-radius:50%;
+    border:3px solid #e2e8f0;border-top-color:#1477d6;
+    animation:spin .8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .cat-loading p{font-size:13px;color:#64748b;margin:0;}
+  .cat-empty,.cat-error{
+    grid-column:1/-1;text-align:center;
+    padding:40px 20px;font-size:13px;color:#64748b;
+  }
+  .cat-error{color:#dc2626;}
+  /* Detalle */
+  .det-overlay{
+    position:fixed;inset:0;
+    background:rgba(11,31,58,.65);
+    backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+    z-index:10000;display:flex;align-items:center;justify-content:center;
+    padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;
+  }
+  .det-overlay.show{opacity:1;pointer-events:all;}
+  .det-box{
+    background:#fff;border-radius:20px;width:100%;max-width:340px;
+    overflow:hidden;transform:scale(.93);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 20px 60px rgba(11,31,58,.35);
+  }
+  .det-overlay.show .det-box{transform:scale(1);}
+  .det-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:#f4f6fb;}
+  .det-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .det-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;}
+  .det-body{padding:18px 18px 20px;}
+  .det-body h3{font-size:17px;font-weight:800;color:#0b1f3a;margin:0 0 6px;font-family:'Space Grotesk',sans-serif;}
+  .det-body p{font-size:13px;color:#475569;margin:0 0 12px;line-height:1.5;}
+  .det-price{font-size:22px;font-weight:800;color:#1477d6;margin:0 0 16px;font-family:'Space Grotesk',sans-serif;}
+  .det-actions{display:flex;gap:8px;}
+  .det-back{
+    flex:0 0 auto;padding:10px 14px;border-radius:10px;
+    background:#f1f5f9;border:none;cursor:pointer;
+    font-size:13px;font-weight:600;color:#475569;
+  }
+  .det-pedir{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+    background:#25D366;color:#fff;border:none;border-radius:10px;
+    padding:10px;font-size:13px;font-weight:800;
+    cursor:pointer;text-decoration:none;font-family:'Inter',sans-serif;
+  }
+  .det-pedir:hover{background:#1ebe59;}
 
-   PARA ACTUALIZAR ALGO EN TODAS LAS TARJETAS A LA VEZ (tema de
-   temporada, catálogo, diseño del catálogo, etc.), editá este único
-   archivo y subilo — no hace falta tocar cada tarjeta de vendedor.
-══════════════════════════════════════════════════════════════════ */
-
-/* ──────────────────────────────────────────────────────────────────
-   1) TEMA DE TEMPORADA — cambiá esta única palabra para activar o
-   desactivar la decoración especial en TODAS las tarjetas a la vez.
-   Opciones ya armadas: "halloween", "navidad", "" (sin tema)
-   Para sumar una fecha nueva (ej. día del cáncer de mama), agregá
-   una entrada más al objeto TEMAS de abajo con sus propios emojis.
-──────────────────────────────────────────────────────────────────── */
-var TEMA = "";
-
-/* ESTILO DE MOVIMIENTO — elegí cómo se comportan las decoraciones:
-   "caer"    → caen desde arriba cruzando toda la pantalla (como la lluvia)
-   "brincar" → quedan en un punto fijo y saltan suavemente ahí mismo, más grandes */
-var ESTILO = "caer";
-
-var TEMAS = {
-  halloween: { emojis:["🎃","🦇","👻"], badge:"🎃 Feliz Halloween" },
-  navidad:   { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
-  cancer_mama: { emojis:["🎗️"], badge:"🎗️ Octubre Rosa — Día del Cáncer de Mama" },
-  dia_muertos: { emojis:["💀","🌷","🕯️"], badge:"💀 Día de Muertos" }
-};
-
-/* ──────────────────────────────────────────────────────────────────
-   2) CONEXIÓN AL CATÁLOGO (misma hoja para todos los vendedores)
-──────────────────────────────────────────────────────────────────── */
-var SPREADSHEET_ID = "1h86aQIffJN-1KVLpt7DLgGd_MXxoQzMb-wDtXSmj3fk";
-var SHEET_NAME      = "CSGG";
-var API_KEY         = "AIzaSyArcHqRNfyFlOhetUofr8mNOwgGpZz2Kkc";
-
-var SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/"
-  + SPREADSHEET_ID + "/values/" + encodeURIComponent(SHEET_NAME + "!A:Z")
-  + "?key=" + API_KEY;
-
-var ICONOS = {impresora:"🖨",toner:"🔴",computo:"💻",accesorios:"🔌",oficina:"📂"};
-var todos = [], activeTab = "todos", cargado = false;
-
-/* ══════════════════════════════════════════════════════════════════
-   A PARTIR DE ACÁ: lógica general. No hace falta tocar nada de lo
-   que sigue para actualizar el catálogo o el tema — eso ya se
-   maneja arriba. Esto solo se ejecuta cuando la página carga.
-══════════════════════════════════════════════════════════════════ */
-
-document.addEventListener("DOMContentLoaded", function(){
-
-  /* --- Rellenar los datos del vendedor en el HTML --- */
-  document.title = (typeof NOMBRE_COMPLETO !== "undefined" ? NOMBRE_COMPLETO : "Compumatt") + " · Compumatt";
-  var elName = document.getElementById("vendorName");
-  if(elName) elName.textContent = NOMBRE_COMPLETO;
-  var elRole = document.getElementById("vendorRole");
-  if(elRole) elRole.textContent = ROL;
-  var elPhone = document.getElementById("vendorPhone");
-  if(elPhone) elPhone.textContent = TEL;
-
-  var pedidoBtn = document.getElementById("pedidoEspecialBtn");
-  if(pedidoBtn){
-    var msgPedido = encodeURIComponent("Hola " + NOMBRE + ", quiero hacer un pedido especial de un producto que no tienen en tienda. ¿Me ayudas?");
-    pedidoBtn.href = "https://wa.me/" + WA + "?text=" + msgPedido;
+  .logoBand{
+    background:#fff;
+    padding: 20px 26px 14px;
+    text-align:center;
+    border-bottom: 1px solid var(--line);
+  }
+  .logoBand img{
+    max-width: 200px;
+    width:60%;
+    height:auto;
+    display:inline-block;
+  }
+  .header{
+    position:relative;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 62%, var(--blue-light) 100%);
+    padding: 26px 26px 40px;
+    color:#fff;
+    overflow:hidden;
+  }
+  .swoosh{
+    position:absolute;
+    right:-40px;
+    top:-40px;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    border: 14px solid rgba(255,255,255,0.14);
+    border-bottom-color:transparent;
+    border-left-color:transparent;
+    transform: rotate(35deg);
+  }
+  .swoosh2{
+    position:absolute;
+    left:-50px;
+    bottom:-60px;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    border: 10px solid rgba(255,255,255,0.10);
+    border-top-color:transparent;
+    border-right-color:transparent;
+    transform: rotate(-20deg);
+  }
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color: rgba(255,255,255,0.78);
+    margin:0 0 10px;
+    font-weight:600;
+  }
+  .name{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight:700;
+    margin:0 0 4px;
+    line-height:1.15;
+  }
+  .role{
+    font-size:14px;
+    color: rgba(255,255,255,0.85);
+    margin:0;
+    font-weight:500;
+  }
+  .brandline{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:20px;
+  }
+  .brandline .mark{
+    width:24px; height:24px;
+    border-radius:50%;
+    border:3px solid #fff;
+    border-right-color: var(--red);
+    border-top-color: var(--red);
+  }
+  .brandline span{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:.08em;
+    color: rgba(255,255,255,0.92);
+  }
+  .body{
+    padding: 22px 22px 26px;
+  }
+  .phone{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 12px 14px;
+    background: var(--paper);
+    border-radius:12px;
+    margin-bottom:18px;
+    font-size:14px;
+    color:var(--slate);
+  }
+  .phone strong{
+    color:var(--navy);
+    font-weight:600;
+    letter-spacing:.02em;
+  }
+  .actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    text-decoration:none;
+    padding:14px 16px;
+    border-radius:12px;
+    font-weight:600;
+    font-size:14.5px;
+    transition: transform .15s ease, box-shadow .15s ease;
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+    width:100%;
+  }
+  .btn:active{ transform: scale(0.98); }
+  .btn:focus-visible{
+    outline:2px solid var(--blue);
+    outline-offset:2px;
+  }
+  .btn-primary{
+    background: linear-gradient(120deg, var(--navy) 0%, var(--blue) 100%);
+    color:#fff;
+  }
+  .btn-primary:hover{ box-shadow: 0 8px 18px -8px rgba(11,31,58,0.55); }
+  .btn-outline{
+    background:#fff;
+    color:var(--navy);
+    border:1.5px solid var(--line);
+  }
+  .btn-outline:hover{ border-color: var(--blue); color:var(--blue); }
+  .btn-red{
+    background: var(--red);
+    color:#fff;
+  }
+  .btn-red:hover{ box-shadow: 0 8px 18px -8px rgba(238,46,46,0.55); }
+  .btn-cyan{
+    background: linear-gradient(120deg, var(--blue) 0%, var(--cyan) 100%);
+    color:#fff;
+  }
+  .btn-cyan:hover{ box-shadow: 0 8px 18px -8px rgba(41,182,246,0.55); }
+  .foot{
+    text-align:center;
+    font-size:11.5px;
+    color: var(--slate);
+    margin-top:18px;
+    line-height:1.5;
   }
 
-  /* --- Botón "Enviar mensaje" con saludo según la hora --- */
-  var sendMessageBtn = document.getElementById('sendMessageBtn');
-  if(sendMessageBtn){
-    sendMessageBtn.addEventListener('click', function(){
-      var hour = new Date().getHours();
-      var greeting;
-      if(hour >= 5 && hour < 12){ greeting = 'Buenos días ' + NOMBRE; }
-      else if(hour >= 12 && hour < 19){ greeting = 'Buenas tardes ' + NOMBRE; }
-      else { greeting = 'Buenas noches ' + NOMBRE; }
-      var waUrl = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(greeting);
-      window.open(waUrl, '_blank');
-    });
+  /* Modal */
+  .overlay{
+    position:fixed;
+    inset:0;
+    background: rgba(11,31,58,0.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:50;
   }
-
-  /* --- Modal "Guardar mi contacto" --- */
-  var overlay = document.getElementById('saveOverlay');
-  var openBtn = document.getElementById('openSaveModal');
-  var cancelBtn = document.getElementById('cancelSave');
-  var confirmBtn = document.getElementById('confirmSave');
-
-  if(openBtn) openBtn.addEventListener('click', function(){ overlay.classList.add('show'); });
-  if(cancelBtn) cancelBtn.addEventListener('click', function(){ overlay.classList.remove('show'); });
-  if(overlay) overlay.addEventListener('click', function(e){
-    if(e.target === overlay){ overlay.classList.remove('show'); }
-  });
-
-  function downloadMyVCard(){
-    var partes = NOMBRE_COMPLETO.split(" ");
-    var primerNombre = partes[0] || NOMBRE_COMPLETO;
-    var apellidos = partes.slice(1).join(" ");
-    var vcard = [
-      'BEGIN:VCARD',
-      'VERSION:3.0',
-      'N:' + apellidos + ';' + primerNombre + ';;;',
-      'FN:' + NOMBRE_COMPLETO,
-      'ORG:Compumatt de Nicaragua S.A.',
-      'TITLE:' + ROL,
-      'TEL;TYPE=WORK,VOICE:+' + WA,
-      'NOTE:Pedido especial o catálogo? Escríbeme por WhatsApp.',
-      'END:VCARD'
-    ].join('\n');
-    var blob = new Blob([vcard], {type:'text/vcard'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = NOMBRE_COMPLETO.replace(/ /g,'_') + '_Compumatt.vcf';
-    document.body.appendChild(a);
-    a.click();
-    URL.revokeObjectURL(url);
+  .overlay.show{ display:flex; }
+  .modal{
+    background:#fff;
+    border-radius:18px;
+    width:100%;
+    max-width:360px;
+    padding:22px;
+    box-shadow: 0 24px 48px -12px rgba(11,31,58,0.35);
+    animation: rise .35s cubic-bezier(.2,.8,.2,1) both;
   }
-
-  if(confirmBtn){
-    confirmBtn.addEventListener('click', function(){
-      var visitorName = document.getElementById('visitorName').value.trim();
-      var visitorPhone = document.getElementById('visitorPhone').value.trim();
-      downloadMyVCard();
-      if(visitorPhone){
-        var msg = 'Hola ' + NOMBRE + ', guardé tu contacto desde tu tarjeta digital.' + (visitorName ? ' Soy ' + visitorName + '.' : '');
-        var waUrl = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
-        window.open(waUrl, '_blank');
-      }
-      overlay.classList.remove('show');
-    });
+  .modal h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:18px;
+    margin:0 0 6px;
+    color:var(--navy);
   }
-
-  /* --- Tema de temporada --- */
-  initTema();
-
-  /* --- Catálogo: abrir / cerrar --- */
-  var openCatalog = document.getElementById("openCatalog");
-  var catOverlay = document.getElementById("catOverlay");
-  var catClose = document.getElementById("catClose");
-  var catSearch = document.getElementById("catSearch");
-  var detOverlay = document.getElementById("detOverlay");
-
-  if(openCatalog) openCatalog.onclick = function(){
-    catOverlay.classList.add("show");
-    catSearch.value = "";
-    activeTab = "todos";
-    if(!cargado) cargar(); else { tabs(); grid(); }
-    var sp = document.querySelector(".seasonParticles");
-    if(sp) sp.style.display = "none";
-  };
-  if(catClose) catClose.onclick = function(){
-    catOverlay.classList.remove("show");
-    var sp = document.querySelector(".seasonParticles");
-    if(sp) sp.style.display = "";
-  };
-  if(catOverlay) catOverlay.onclick = function(e){
-    if(e.target===this){
-      this.classList.remove("show");
-      var sp = document.querySelector(".seasonParticles");
-      if(sp) sp.style.display = "";
-    }
-  };
-  if(detOverlay) detOverlay.onclick = function(e){
-    if(e.target===this) this.classList.remove("show");
-  };
-  if(catSearch) catSearch.oninput = grid;
-
-});
-
-function initTema(){
-  if(!TEMA || !TEMAS[TEMA]) return;
-  var cfg = TEMAS[TEMA];
-  document.body.classList.add("tema-" + TEMA);
-
-  var wrap = document.createElement("div");
-  wrap.className = "seasonParticles estilo-" + (ESTILO==="brincar" ? "brincar" : "caer");
-
-  for(var i=0;i<18;i++){
-    var s = document.createElement("span");
-    s.textContent = cfg.emojis[i % cfg.emojis.length];
-
-    if(ESTILO === "brincar"){
-      s.style.left = (5 + Math.random()*90) + "vw";
-      s.style.top  = (8 + Math.random()*78) + "vh";
-      s.style.fontSize = (30 + Math.random()*20) + "px";
-      s.style.animationDuration = (1.4 + Math.random()*1.4) + "s";
-      s.style.animationDelay = (Math.random()*2) + "s";
-    } else {
-      s.style.left = (Math.random()*100) + "vw";
-      s.style.fontSize = (16 + Math.random()*14) + "px";
-      s.style.animationDuration = (7 + Math.random()*8) + "s";
-      s.style.animationDelay = (Math.random()*8) + "s";
-    }
-    wrap.appendChild(s);
+  .modal p.sub{
+    font-size:13px;
+    color:var(--slate);
+    margin:0 0 16px;
+    line-height:1.45;
   }
-  document.body.appendChild(wrap);
-
-  var eyebrow = document.querySelector(".eyebrow");
-  if(eyebrow){
-    var badge = document.createElement("div");
-    badge.className = "seasonBadge";
-    badge.textContent = cfg.badge;
-    eyebrow.insertAdjacentElement("afterend", badge);
+  .field{
+    margin-bottom:12px;
   }
-
-  var catTitle = document.getElementById("catTitle");
-  if(catTitle){
-    catTitle.textContent = "📦 Catálogo Compumatt " + cfg.emojis[0];
+  .field label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--navy);
+    margin-bottom:6px;
   }
+  .field input{
+    width:100%;
+    padding:11px 12px;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    font-size:14px;
+    font-family:inherit;
+    color:var(--navy);
+    background: var(--paper);
+  }
+  .field input:focus{
+    outline:none;
+    border-color: var(--blue);
+  }
+  .modal-actions{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+  }
+  .modal-actions .btn{ padding:12px 14px; font-size:14px; }
+  .btn-ghost{
+    background:#fff;
+    color:var(--slate);
+    border:1.5px solid var(--line);
+  }
+/* ══════════════════════════════════════════════════════
+   TEMA DE TEMPORADA (Halloween / Navidad / etc.)
+   Cambiar TEMA en el <script> de abajo para activar/desactivar.
+══════════════════════════════════════════════════════ */
+body.tema-halloween .header{
+  background: linear-gradient(135deg, #3d1e63 0%, #ff7a1a 100%) !important;
+}
+body.tema-halloween .eyebrow{ color:#ffd580 !important; }
+body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
+
+.seasonParticles{
+  position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden;
+}
+.seasonParticles span{
+  position:absolute; opacity:.85;
 }
 
-function cargar(){
-  var g = document.getElementById("catGrid");
-  g.innerHTML = '<div class="cat-loading"><div class="cat-spinner"></div><p>Cargando catálogo...</p></div>';
-  fetch(SHEET_URL)
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if(!data.values){ throw new Error("sin datos"); }
-      todos = parsear(data.values);
-      cargado = true;
-      tabs(); grid();
-    })
-    .catch(function(){
-      g.innerHTML = '<div class="cat-error">❌ No se pudo cargar el catálogo.<br>Verifica la API Key, el nombre de la hoja y los permisos de acceso.</div>';
-    });
+/* Estilo "caer": las decoraciones caen desde arriba, cruzando toda la pantalla */
+.seasonParticles.estilo-caer span{
+  top:-40px;
+  animation: fall linear infinite;
+}
+@keyframes fall{
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
 }
 
-function parsear(filasCrudas){
-  var filas = (filasCrudas||[]).filter(function(f){ return f && (f.length>1 || f[0]!==""); });
-  if(filas.length < 2) return [];
-
-  var enc = filas[0].map(function(h){return (h||"").trim().toLowerCase();});
-  function col(n){ return enc.indexOf(n); }
-
-  var iCat=col("categoria"), iNom=col("nombre"), iDesc=col("descripcion"),
-      iPre=col("precio"), iImg=col("imagen_url"), iBdg=col("badge"),
-      iAct=col("activo"), iIco=col("icono");
-
-  var lista=[];
-  for(var i=1;i<filas.length;i++){
-    var c=filas[i];
-    var cat = iCat>=0?(c[iCat]||"").trim():"";
-    var nom = iNom>=0?(c[iNom]||"").trim():"";
-    if(!cat && !nom) continue;
-    var act = iAct>=0?(c[iAct]||"").trim().toUpperCase():"SI";
-    if(act==="NO") continue;
-    lista.push({
-      cat  : cat.toLowerCase()||"otros",
-      nom  : nom,
-      desc : iDesc>=0?(c[iDesc]||"").trim():"",
-      pre  : iPre>=0?(c[iPre]||"").trim():"",
-      img  : iImg>=0?(c[iImg]||"").trim():"",
-      bdg  : iBdg>=0?(c[iBdg]||"").trim().toLowerCase():"",
-      ico  : iIco>=0?(c[iIco]||"📦").trim():"📦",
-    });
-  }
-  return lista;
+/* Estilo "brincar": las decoraciones quedan fijas en un punto y saltan suavemente ahí mismo, más grandes */
+.seasonParticles.estilo-brincar span{
+  animation: bounce ease-in-out infinite;
+}
+@keyframes bounce{
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-22px) scale(1.08); }
 }
 
-function tabs(){
-  var cats=["todos"];
-  todos.forEach(function(p){if(cats.indexOf(p.cat)<0)cats.push(p.cat);});
-  var el=document.getElementById("catTabs");
-  el.innerHTML="";
-  cats.forEach(function(c){
-    var b=document.createElement("button");
-    b.className="cat-tab"+(c===activeTab?" active":"");
-    b.textContent=(c==="todos"?"🗂 Todos":(ICONOS[c]||"📦")+" "+c.charAt(0).toUpperCase()+c.slice(1));
-    b.onclick=function(){
-      activeTab=c;
-      document.querySelectorAll(".cat-tab").forEach(function(x){x.classList.remove("active");});
-      b.classList.add("active");
-      grid();
-    };
-    el.appendChild(b);
-  });
-}
-
-function grid(){
-  var q=document.getElementById("catSearch").value.toLowerCase().trim();
-  var lista=todos.filter(function(p){
-    return (activeTab==="todos"||p.cat===activeTab)
-        &&(!q||p.nom.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));
-  });
-  var el=document.getElementById("catGrid");
-  el.innerHTML="";
-  if(!lista.length){el.innerHTML='<div class="cat-empty">😕 Sin resultados.</div>';return;}
-
-  var bLbl={nuevo:"✨ Nuevo",oferta:"🔥 Oferta",agotado:"❌ Agotado"};
-  lista.forEach(function(p){
-    var d=document.createElement("div");
-    d.className="prod-card";
-    var imgH=p.img
-      ?'<img src="'+p.img+'" alt="'+p.nom+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
-       +'<div class="prod-ph" style="display:none">'+p.ico+'</div>'
-      :'<div class="prod-ph">'+p.ico+'</div>';
-    var bdgH=p.bdg&&bLbl[p.bdg]?'<div class="prod-bdg-w"><span class="prod-bdg '+p.bdg+'">'+bLbl[p.bdg]+'</span></div>':"";
-    var waMsg=encodeURIComponent("Hola "+NOMBRE+" 👋, vi el catálogo de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Está disponible?");
-    var actH=p.bdg==="agotado"
-      ?'<span class="prod-agotado">Sin stock</span>'
-      :'<a class="prod-wa" href="https://wa.me/'+WA+'?text='+waMsg+'" target="_blank" onclick="event.stopPropagation()">💬</a>';
-    d.innerHTML=
-      '<div class="prod-img-w">'+imgH+bdgH+'</div>'
-      +'<div class="prod-body">'
-        +'<p class="prod-name">'+p.nom+'</p>'
-        +'<div class="prod-footer"><span class="prod-price">'+p.pre+'</span>'+actH+'</div>'
-      +'</div>';
-    d.onclick=function(){detalle(p);};
-    el.appendChild(d);
-  });
-}
-
-function detalle(p){
-  var waMsg=encodeURIComponent("Hola "+NOMBRE+" 👋, vi el catálogo de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Está disponible?");
-  var imgH=p.img
-    ?'<div class="det-img"><img src="'+p.img+'" alt="'+p.nom+'" onerror="this.style.display=\'none\'"></div>'
-    :'<div class="det-img"><div class="det-img-ph">'+p.ico+'</div></div>';
-  var actH=p.bdg==="agotado"
-    ?'<button class="det-back" onclick="document.getElementById(\'detOverlay\').classList.remove(\'show\')">← Volver</button>'
-     +'<span style="font-size:13px;font-weight:800;color:#dc2626">❌ Sin stock</span>'
-    :'<button class="det-back" onclick="document.getElementById(\'detOverlay\').classList.remove(\'show\')">← Volver</button>'
-     +'<a class="det-pedir" href="https://wa.me/'+WA+'?text='+waMsg+'" target="_blank">💬 Pedir por WhatsApp</a>';
-  document.getElementById("detBox").innerHTML=
-    imgH+'<div class="det-body"><h3>'+p.nom+'</h3><p>'+p.desc+'</p><p class="det-price">'+p.pre+'</p><div class="det-actions">'+actH+'</div></div>';
-  document.getElementById("detOverlay").classList.add("show");
+.seasonBadge{
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(255,255,255,.18); color:#fff; font-weight:700;
+  font-size:12px; letter-spacing:.04em; padding:4px 10px; border-radius:20px;
+  margin-top:8px;
 }
