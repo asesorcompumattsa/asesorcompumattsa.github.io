@@ -17,11 +17,16 @@
 ──────────────────────────────────────────────────────────────────── */
 var TEMA = "";
 
+/* ESTILO DE MOVIMIENTO — elegí cómo se comportan las decoraciones:
+   "caer"    → caen desde arriba cruzando toda la pantalla (como la lluvia)
+   "brincar" → quedan en un punto fijo y saltan suavemente ahí mismo, más grandes */
+var ESTILO = "caer";
+
 var TEMAS = {
-  halloween:   { emojis:["🎃","🦇","👻"], badge:"🎃" },
-  navidad:     { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
+  halloween: { emojis:["🎃","🦇","👻"], badge:"🎃 Feliz Halloween" },
+  navidad:   { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
   cancer_mama: { emojis:["🎗️"], badge:"🎗️ Octubre Rosa — Día del Cáncer de Mama" },
-  diamuertos:  { emojis:["💀","🌼","🕯️"], badge:"💀", modo:"brinca" }
+  dia_muertos: { emojis:["💀","🌷","🕯️"], badge:"💀 Día de Muertos" }
 };
 
 /* ──────────────────────────────────────────────────────────────────
@@ -169,14 +174,24 @@ function initTema(){
   document.body.classList.add("tema-" + TEMA);
 
   var wrap = document.createElement("div");
-  wrap.className = "seasonParticles";
+  wrap.className = "seasonParticles estilo-" + (ESTILO==="brincar" ? "brincar" : "caer");
+
   for(var i=0;i<18;i++){
     var s = document.createElement("span");
     s.textContent = cfg.emojis[i % cfg.emojis.length];
-    s.style.left = (Math.random()*100) + "vw";
-    s.style.animationDuration = (7 + Math.random()*8) + "s";
-    s.style.animationDelay = (Math.random()*8) + "s";
-    s.style.fontSize = (16 + Math.random()*14) + "px";
+
+    if(ESTILO === "brincar"){
+      s.style.left = (5 + Math.random()*90) + "vw";
+      s.style.top  = (8 + Math.random()*78) + "vh";
+      s.style.fontSize = (30 + Math.random()*20) + "px";
+      s.style.animationDuration = (1.4 + Math.random()*1.4) + "s";
+      s.style.animationDelay = (Math.random()*2) + "s";
+    } else {
+      s.style.left = (Math.random()*100) + "vw";
+      s.style.fontSize = (16 + Math.random()*14) + "px";
+      s.style.animationDuration = (7 + Math.random()*8) + "s";
+      s.style.animationDelay = (Math.random()*8) + "s";
+    }
     wrap.appendChild(s);
   }
   document.body.appendChild(wrap);
