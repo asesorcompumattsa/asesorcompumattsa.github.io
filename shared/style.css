@@ -470,12 +470,26 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
   position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden;
 }
 .seasonParticles span{
-  position:absolute; top:-40px; font-size:22px; opacity:.85;
+  position:absolute; opacity:.85;
+}
+
+/* Estilo "caer": las decoraciones caen desde arriba, cruzando toda la pantalla */
+.seasonParticles.estilo-caer span{
+  top:-40px;
   animation: fall linear infinite;
 }
 @keyframes fall{
   0%   { transform: translateY(0) rotate(0deg); }
   100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* Estilo "brincar": las decoraciones quedan fijas en un punto y saltan suavemente ahí mismo, más grandes */
+.seasonParticles.estilo-brincar span{
+  animation: bounce ease-in-out infinite;
+}
+@keyframes bounce{
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-22px) scale(1.08); }
 }
 
 .seasonBadge{
