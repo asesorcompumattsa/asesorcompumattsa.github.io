@@ -11,19 +11,16 @@
 /* ──────────────────────────────────────────────────────────────────
    1) TEMA DE TEMPORADA — cambiá esta única palabra para activar o
    desactivar la decoración especial en TODAS las tarjetas a la vez.
-   Opciones ya armadas: "halloween", "navidad", "diamuertos", "" (sin tema)
-   Para sumar una fecha nueva, agregá una entrada más al objeto TEMAS
-   de abajo con sus propios emojis. Si querés que los emojis reboten
-   arriba del "Asesor de ventas" en vez de caer por la pantalla,
-   agregale  modo:"brinca"  a esa entrada (mirá "diamuertos" abajo).
+   Opciones ya armadas: "halloween", "navidad", "" (sin tema)
+   Para sumar una fecha nueva (ej. día del cáncer de mama), agregá
+   una entrada más al objeto TEMAS de abajo con sus propios emojis.
 ──────────────────────────────────────────────────────────────────── */
-var TEMA = "diamuertos";
+var TEMA = "halloween";
 
 var TEMAS = {
-  halloween:   { emojis:["🎃","🦇","👻"], badge:"🎃 Feliz Halloween" },
-  navidad:     { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
-  cancer_mama: { emojis:["🎗️"], badge:"🎗️ Octubre Rosa — Día del Cáncer de Mama" },
-  diamuertos:  { emojis:["💀","🌼","🕯️"], badge:"💀 Día de los Muertos", modo:"brinca" }
+  halloween: { emojis:["🎃","🦇","👻"], badge:"🎃 Feliz Halloween" },
+  navidad:   { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
+  cancer_mama: { emojis:["🎗️"], badge:"🎗️ Octubre Rosa — Día del Cáncer de Mama" }
 };
 
 /* ──────────────────────────────────────────────────────────────────
@@ -169,37 +166,21 @@ function initTema(){
   if(!TEMA || !TEMAS[TEMA]) return;
   var cfg = TEMAS[TEMA];
   document.body.classList.add("tema-" + TEMA);
-  var eyebrow = document.querySelector(".eyebrow");
 
-  if(cfg.modo === "brinca"){
-    /* --- Fila de emojis que rebotan/se mecen encima del rol del vendedor --- */
-    if(eyebrow){
-      var row = document.createElement("div");
-      row.className = "seasonBounceRow";
-      cfg.emojis.forEach(function(e, i){
-        var s = document.createElement("span");
-        s.textContent = e;
-        s.style.animationDelay = (i * 0.22) + "s";
-        row.appendChild(s);
-      });
-      eyebrow.insertAdjacentElement("beforebegin", row);
-    }
-  } else {
-    /* --- Partículas cayendo por la pantalla (comportamiento original) --- */
-    var wrap = document.createElement("div");
-    wrap.className = "seasonParticles";
-    for(var i=0;i<18;i++){
-      var s = document.createElement("span");
-      s.textContent = cfg.emojis[i % cfg.emojis.length];
-      s.style.left = (Math.random()*100) + "vw";
-      s.style.animationDuration = (7 + Math.random()*8) + "s";
-      s.style.animationDelay = (Math.random()*8) + "s";
-      s.style.fontSize = (16 + Math.random()*14) + "px";
-      wrap.appendChild(s);
-    }
-    document.body.appendChild(wrap);
+  var wrap = document.createElement("div");
+  wrap.className = "seasonParticles";
+  for(var i=0;i<18;i++){
+    var s = document.createElement("span");
+    s.textContent = cfg.emojis[i % cfg.emojis.length];
+    s.style.left = (Math.random()*100) + "vw";
+    s.style.animationDuration = (7 + Math.random()*8) + "s";
+    s.style.animationDelay = (Math.random()*8) + "s";
+    s.style.fontSize = (16 + Math.random()*14) + "px";
+    wrap.appendChild(s);
   }
+  document.body.appendChild(wrap);
 
+  var eyebrow = document.querySelector(".eyebrow");
   if(eyebrow){
     var badge = document.createElement("div");
     badge.className = "seasonBadge";
