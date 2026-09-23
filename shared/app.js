@@ -20,7 +20,7 @@ var TEMA = "";
 /* ESTILO DE MOVIMIENTO — elegí cómo se comportan las decoraciones:
    "caer"    → caen desde arriba cruzando toda la pantalla (como la lluvia)
    "brincar" → quedan en un punto fijo y saltan suavemente ahí mismo, más grandes */
-var ESTILO = "caer";
+var ESTILO = "brincar";
 
 var TEMAS = {
   halloween: { emojis:["🎃","🦇","👻"], badge:"🎃" },
@@ -218,6 +218,7 @@ function cargar(){
     .then(function(data){
       if(!data.values){ throw new Error("sin datos"); }
       todos = parsear(data.values);
+      actualizarBannerOfertas();
       cargado = true;
       tabs(); grid();
     })
@@ -261,12 +262,13 @@ function parsear(filasCrudas){
 function tabs(){
   var cats=["todos"];
   todos.forEach(function(p){if(cats.indexOf(p.cat)<0)cats.push(p.cat);});
+  if(todos.some(function(p){return p.bdg === "oferta";})) cats.push("ofertas");
   var el=document.getElementById("catTabs");
   el.innerHTML="";
   cats.forEach(function(c){
     var b=document.createElement("button");
     b.className="cat-tab"+(c===activeTab?" active":"");
-    b.textContent=(c==="todos"?"🗂 Todos":(ICONOS[c]||"📦")+" "+c.charAt(0).toUpperCase()+c.slice(1));
+    b.textContent=(c==="todos"?"🗂 Todos":(c==="ofertas"?"🔥 Ofertas":(ICONOS[c]||"📦")+" "+c.charAt(0).toUpperCase()+c.slice(1)));
     b.onclick=function(){
       activeTab=c;
       document.querySelectorAll(".cat-tab").forEach(function(x){x.classList.remove("active");});
@@ -280,7 +282,10 @@ function tabs(){
 function grid(){
   var q=document.getElementById("catSearch").value.toLowerCase().trim();
   var lista=todos.filter(function(p){
-    return (activeTab==="todos"||p.cat===activeTab)
+    var perteneceATab = activeTab === "ofertas"
+      ? p.bdg === "oferta"
+      : (activeTab === "todos" || p.cat === activeTab);
+    return perteneceATab
         &&(!q||p.nom.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));
   });
   var el=document.getElementById("catGrid");
@@ -357,3 +362,29 @@ if (document.readyState === "loading") {
 } else {
   initMascotaBienvenida();
 }
+
+
+/* Ofertas dinámicas: se activa solo si Google Sheets tiene badge = oferta. */
+function actualizarBannerOfertas(){
+  var banner=document.getElementById("offersBanner");
+  if(!banner) return;
+  banner.hidden=!todos.some(function(p){return p.bdg === "oferta";});
+}
+function abrirOfertas(){
+  var banner=document.getElementById("offersBanner");
+  var overlay=document.getElementById("catOverlay");
+  var search=document.getElementById("catSearch");
+  if(!banner||!overlay||banner.hidden) return;
+  overlay.classList.add("show");
+  if(search) search.value="";
+  activeTab="ofertas";
+  if(!cargado) cargar(); else { tabs(); grid(); }
+}
+document.addEventListener("DOMContentLoaded",function(){
+  var banner=document.getElementById("offersBanner");
+  if(!banner) return;
+  banner.addEventListener("click",abrirOfertas);
+  banner.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();abrirOfertas();}
+  });
+});
