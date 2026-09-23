@@ -596,3 +596,31 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
   .card-mascot-welcome { transform: scale(.86); transform-origin: top right; }
   .header { padding-right: 120px; }
 }
+
+
+/* Banner dinámico de ofertas */
+.offers-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -5px 0 18px;
+  padding: 13px 14px;
+  border-radius: 15px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,.3), transparent 30%), linear-gradient(120deg, #ef2929 0%, #ff7518 55%, #ffb300 100%);
+  box-shadow: 0 8px 18px -8px rgba(238,46,46,.65);
+  animation: offersPulse 2.8s ease-in-out infinite;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.offers-banner:hover,
+.offers-banner:focus-visible { transform: translateY(-2px) scale(1.01); box-shadow: 0 12px 22px -8px rgba(238,46,46,.75); outline: none; }
+.offers-banner:active { transform: scale(.98); }
+.offers-fire { flex: 0 0 auto; font-size: 27px; line-height: 1; animation: offersFire 1.1s ease-in-out infinite alternate; }
+.offers-copy { min-width: 0; display: flex; flex: 1; flex-direction: column; gap: 3px; }
+.offers-copy strong { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: .03em; }
+.offers-copy span { font-size: 10.5px; line-height: 1.2; color: rgba(255,255,255,.92); }
+.offers-arrow { flex: 0 0 auto; font-size: 11px; font-weight: 800; white-space: nowrap; }
+@keyframes offersPulse { 0%,100% { box-shadow: 0 8px 18px -8px rgba(238,46,46,.65); } 50% { box-shadow: 0 12px 25px -7px rgba(255,117,24,.9); } }
+@keyframes offersFire { from { transform: translateY(1px) rotate(-5deg) scale(.95); } to { transform: translateY(-2px) rotate(5deg) scale(1.08); } }
