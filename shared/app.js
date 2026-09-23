@@ -166,6 +166,9 @@ document.addEventListener("DOMContentLoaded", function(){
   };
   if(catSearch) catSearch.oninput = grid;
 
+  /* Cargar el catálogo al entrar para detectar y habilitar ofertas especiales. */
+  if(!cargado) cargar();
+
 });
 
 function initTema(){
@@ -252,7 +255,7 @@ function parsear(filasCrudas){
       desc : iDesc>=0?(c[iDesc]||"").trim():"",
       pre  : iPre>=0?(c[iPre]||"").trim():"",
       img  : iImg>=0?(c[iImg]||"").trim():"",
-      bdg  : iBdg>=0?(c[iBdg]||"").trim().toLowerCase():"",
+      bdg  : iBdg>=0?(c[iBdg]||"").trim().toLowerCase().replace(/\s+/g," "):"",
       ico  : iIco>=0?(c[iIco]||"📦").trim():"📦",
     });
   }
