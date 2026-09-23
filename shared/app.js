@@ -15,12 +15,12 @@
    Para sumar una fecha nueva (ej. día del cáncer de mama), agregá
    una entrada más al objeto TEMAS de abajo con sus propios emojis.
 ──────────────────────────────────────────────────────────────────── */
-var TEMA = "";
+var TEMA = "halloween";
 
 /* ESTILO DE MOVIMIENTO — elegí cómo se comportan las decoraciones:
    "caer"    → caen desde arriba cruzando toda la pantalla (como la lluvia)
    "brincar" → quedan en un punto fijo y saltan suavemente ahí mismo, más grandes */
-var ESTILO = "brincar";
+var ESTILO = "caer";
 
 var TEMAS = {
   halloween: { emojis:["🎃","🦇","👻"], badge:"🎃" },
