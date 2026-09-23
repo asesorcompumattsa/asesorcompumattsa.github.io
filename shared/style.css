@@ -375,6 +375,16 @@
     color:#fff;
   }
   .btn-red:hover{ box-shadow: 0 8px 18px -8px rgba(238,46,46,0.55); }
+  .btn-special{
+    background:#f1f5f9;
+    color:var(--navy);
+    border:1.5px solid #cbd5e1;
+  }
+  .btn-special:hover{
+    background:#e2e8f0;
+    border-color:#94a3b8;
+    box-shadow:0 8px 18px -8px rgba(11,31,58,0.28);
+  }
   .btn-cyan{
     background: linear-gradient(120deg, var(--blue) 0%, var(--cyan) 100%);
     color:#fff;
