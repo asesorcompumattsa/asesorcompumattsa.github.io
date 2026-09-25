@@ -41,6 +41,7 @@ var EVENTO_ACTIVO  = true;  // Cambia a false para ocultar el banner
 var EVENTO_TITULO  = "Feria Tecnológica";
 var EVENTO_FECHAS  = "25 al 30 de noviembre 2026";
 var EVENTO_MENSAJE = "Somos más que tecnología";
+var EVENTO_DETALLE = "Ven a nuestra Feria Tecnológica y disfruta de nuestros descuentos, promociones y sorpresas especiales.";
 
 var SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/"
   + SPREADSHEET_ID + "/values/" + encodeURIComponent(SHEET_NAME + "!A:Z")
@@ -348,6 +349,39 @@ function initEvento(){
   if(dates) dates.textContent=EVENTO_FECHAS || "Próximamente";
   if(subtitle) subtitle.textContent=EVENTO_MENSAJE || "";
   banner.hidden=false;
+  banner.classList.add("event-clickable");
+  banner.setAttribute("role", "button");
+  banner.setAttribute("tabindex", "0");
+  banner.setAttribute("aria-label", "Ver información de " + (EVENTO_TITULO || "evento"));
+  banner.onclick=mostrarInfoEvento;
+  banner.onkeydown=function(e){
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); mostrarInfoEvento(); }
+  };
+}
+
+function mostrarInfoEvento(){
+  var anterior=document.querySelector(".event-popover");
+  if(anterior){ anterior.remove(); return; }
+  var pop=document.createElement("div");
+  pop.className="event-popover";
+  pop.setAttribute("role", "dialog");
+  pop.setAttribute("aria-label", "Información del evento");
+  pop.innerHTML='<button class="event-popover-close" type="button" aria-label="Cerrar">×</button>'
+    +'<div class="event-popover-icon">🔔</div>'
+    +'<div class="event-popover-copy"><strong></strong><span></span><p></p></div>';
+  pop.querySelector("strong").textContent=EVENTO_TITULO || "Evento Compumatt";
+  pop.querySelector("span").textContent=EVENTO_FECHAS || "Próximamente";
+  pop.querySelector("p").textContent=EVENTO_DETALLE || EVENTO_MENSAJE || "";
+  function cerrar(){
+    pop.classList.remove("show");
+    setTimeout(function(){if(pop.parentNode) pop.remove();}, 180);
+    document.removeEventListener("keydown", alEscucharEscape);
+  }
+  function alEscucharEscape(e){if(e.key === "Escape") cerrar();}
+  pop.querySelector(".event-popover-close").onclick=cerrar;
+  document.body.appendChild(pop);
+  document.addEventListener("keydown", alEscucharEscape);
+  requestAnimationFrame(function(){pop.classList.add("show");});
 }
 
 function detalle(p){
@@ -393,12 +427,19 @@ function initMascotaBienvenida() {
       var catEvent = document.createElement("div");
       catEvent.className = "event-banner cat-event-banner";
       catEvent.setAttribute("aria-label", EVENTO_TITULO || "Evento Compumatt");
+      catEvent.setAttribute("role", "button");
+      catEvent.setAttribute("tabindex", "0");
+      catEvent.setAttribute("aria-label", "Abrir información de " + (EVENTO_TITULO || "evento"));
       catEvent.innerHTML = '<div class="event-bell" aria-hidden="true"><span>🔔</span><i></i></div>'
         +'<div class="event-copy"><strong></strong><span></span><small></small></div>'
         +'<div class="event-spark" aria-hidden="true">✦</div>';
       catEvent.querySelector("strong").textContent = EVENTO_TITULO || "Evento Compumatt";
       catEvent.querySelector(".event-copy span").textContent = EVENTO_FECHAS || "Próximamente";
       catEvent.querySelector("small").textContent = EVENTO_MENSAJE || "";
+      catEvent.onclick = mostrarInfoEvento;
+      catEvent.onkeydown = function(e){
+        if(e.key === "Enter" || e.key === " "){ e.preventDefault(); mostrarInfoEvento(); }
+      };
       drawer.insertBefore(catEvent, catHead || drawer.firstChild);
     }
   }
