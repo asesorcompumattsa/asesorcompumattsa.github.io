@@ -366,12 +366,14 @@ function mostrarInfoEvento(){
   pop.className="event-popover";
   pop.setAttribute("role", "dialog");
   pop.setAttribute("aria-label", "Información del evento");
-  pop.innerHTML='<button class="event-popover-close" type="button" aria-label="Cerrar">×</button>'
+  pop.innerHTML='<div class="event-popover-card">'
+    +'<button class="event-popover-close" type="button" aria-label="Cerrar">×</button>'
     +'<div class="event-popover-icon">🔔</div>'
-    +'<div class="event-popover-copy"><strong></strong><span></span><p></p></div>';
-  pop.querySelector("strong").textContent=EVENTO_TITULO || "Evento Compumatt";
-  pop.querySelector("span").textContent=EVENTO_FECHAS || "Próximamente";
-  pop.querySelector("p").textContent=EVENTO_DETALLE || EVENTO_MENSAJE || "";
+    +'<div class="event-popover-copy"><strong></strong><span></span><p></p></div></div>';
+  var card=pop.querySelector(".event-popover-card");
+  card.querySelector("strong").textContent=EVENTO_TITULO || "Evento Compumatt";
+  card.querySelector("span").textContent=EVENTO_FECHAS || "Próximamente";
+  card.querySelector("p").textContent=EVENTO_DETALLE || EVENTO_MENSAJE || "";
   function cerrar(){
     pop.classList.remove("show");
     setTimeout(function(){if(pop.parentNode) pop.remove();}, 180);
@@ -379,6 +381,7 @@ function mostrarInfoEvento(){
   }
   function alEscucharEscape(e){if(e.key === "Escape") cerrar();}
   pop.querySelector(".event-popover-close").onclick=cerrar;
+  pop.onclick=function(e){if(e.target === pop) cerrar();};
   document.body.appendChild(pop);
   document.addEventListener("keydown", alEscucharEscape);
   requestAnimationFrame(function(){pop.classList.add("show");});
