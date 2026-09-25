@@ -725,3 +725,22 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
 @keyframes eventBell { 0%,100% { transform: rotate(0deg); } 12% { transform: rotate(13deg); } 24% { transform: rotate(-13deg); } 36% { transform: rotate(8deg); } 48% { transform: rotate(-6deg); } 60% { transform: rotate(0deg); } }
 @keyframes notificationDot { 0%,100% { transform: scale(.92); } 45% { transform: scale(1.12); } }
 @keyframes eventSpark { 0%,100% { opacity: .55; transform: scale(.88) rotate(0deg); } 50% { opacity: 1; transform: scale(1.12) rotate(18deg); } }
+
+/* Dentro del catálogo se muestra solo el contenido del evento, sin repetir el banner completo. */
+.cat-event-banner {
+  margin: 2px 20px 8px;
+  padding: 4px 2px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--navy);
+  box-shadow: none;
+  animation: none;
+}
+.cat-event-banner::after { display: none; }
+.cat-event-banner .event-bell { width: 32px; height: 32px; font-size: 27px; }
+.cat-event-banner .event-bell i { width: 11px; height: 11px; }
+.cat-event-banner .event-copy strong { font-size: 11px; color: var(--navy); }
+.cat-event-banner .event-copy span { font-size: 10px; color: var(--blue); }
+.cat-event-banner .event-copy small { font-size: 9px; color: var(--slate); }
+.cat-event-banner .event-spark { font-size: 18px; color: var(--red); }
