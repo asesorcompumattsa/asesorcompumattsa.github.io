@@ -397,7 +397,7 @@ function initMascotaBienvenida() {
         +'<div class="event-copy"><strong></strong><span></span><small></small></div>'
         +'<div class="event-spark" aria-hidden="true">✦</div>';
       catEvent.querySelector("strong").textContent = EVENTO_TITULO || "Evento Compumatt";
-      catEvent.querySelector("span").textContent = EVENTO_FECHAS || "Próximamente";
+      catEvent.querySelector(".event-copy span").textContent = EVENTO_FECHAS || "Próximamente";
       catEvent.querySelector("small").textContent = EVENTO_MENSAJE || "";
       drawer.insertBefore(catEvent, catHead || drawer.firstChild);
     }
