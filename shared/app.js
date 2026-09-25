@@ -38,9 +38,9 @@ var API_KEY         = "AIzaSyArcHqRNfyFlOhetUofr8mNOwgGpZz2Kkc";
 
 /* Evento general de Compumatt: se cambia una sola vez para todos los vendedores. */
 var EVENTO_ACTIVO  = true;  // Cambia a false para ocultar el banner
-var EVENTO_TITULO  = "14 aniversario";
-var EVENTO_FECHAS  = "21 al 25 de noviembre 2026";
-var EVENTO_MENSAJE = "Celebramos contigo";
+var EVENTO_TITULO  = "Feria Tecnologica";
+var EVENTO_FECHAS  = "25 al 30 de noviembre 2026";
+var EVENTO_MENSAJE = "Somos mas que tecnologia";
 
 var SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/"
   + SPREADSHEET_ID + "/values/" + encodeURIComponent(SHEET_NAME + "!A:Z")
