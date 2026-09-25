@@ -745,6 +745,7 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
 .cat-event-banner .event-copy span { font-size: 10px; color: var(--blue); }
 .cat-event-banner .event-copy small { font-size: 9px; color: var(--slate); }
 .cat-event-banner .event-spark { font-size: 18px; color: var(--red); }
+.cat-head .cat-close { display: none !important; }
 .cat-event-banner { cursor: pointer; }
 .cat-event-banner:focus-visible,
 .event-banner:focus-visible { outline: 3px solid rgba(255,193,7,.8); outline-offset: 2px; }
