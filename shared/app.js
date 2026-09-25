@@ -134,6 +134,9 @@ document.addEventListener("DOMContentLoaded", function(){
   /* --- Tema de temporada --- */
   initTema();
 
+  /* --- Banner configurable de eventos --- */
+  initEvento();
+
   /* --- Catálogo: abrir / cerrar --- */
   var openCatalog = document.getElementById("openCatalog");
   var catOverlay = document.getElementById("catOverlay");
@@ -312,11 +315,30 @@ function grid(){
       '<div class="prod-img-w">'+imgH+bdgH+'</div>'
       +'<div class="prod-body">'
         +'<p class="prod-name">'+p.nom+'</p>'
-        +'<div class="prod-footer"><span class="prod-price">'+p.pre+'</span>'+actH+'</div>'
+        +'<div class="prod-footer">'+precioHtml(p,'prod-price')+actH+'</div>'
       +'</div>';
     d.onclick=function(){detalle(p);};
     el.appendChild(d);
   });
+}
+
+function precioHtml(p, clase){
+  if(p.bdg === "oferta"){
+    return '<span class="'+clase+' price-burst"><small>OFERTA</small><strong>'+p.pre+'</strong></span>';
+  }
+  return '<span class="'+clase+'">'+p.pre+'</span>';
+}
+
+function initEvento(){
+  var banner=document.getElementById("eventBanner");
+  if(!banner || typeof EVENTO_ACTIVO === "undefined" || !EVENTO_ACTIVO) return;
+  var title=document.getElementById("eventTitle");
+  var dates=document.getElementById("eventDates");
+  var subtitle=document.getElementById("eventSubtitle");
+  if(title) title.textContent=EVENTO_TITULO || "Evento Compumatt";
+  if(dates) dates.textContent=EVENTO_FECHAS || "Próximamente";
+  if(subtitle) subtitle.textContent=EVENTO_MENSAJE || "";
+  banner.hidden=false;
 }
 
 function detalle(p){
@@ -330,7 +352,7 @@ function detalle(p){
     :'<button class="det-back" onclick="document.getElementById(\'detOverlay\').classList.remove(\'show\')">← Volver</button>'
      +'<a class="det-pedir" href="https://wa.me/'+WA+'?text='+waMsg+'" target="_blank">💬 Pedir por WhatsApp</a>';
   document.getElementById("detBox").innerHTML=
-    imgH+'<div class="det-body"><h3>'+p.nom+'</h3><p>'+p.desc+'</p><p class="det-price">'+p.pre+'</p><div class="det-actions">'+actH+'</div></div>';
+    imgH+'<div class="det-body"><h3>'+p.nom+'</h3><p>'+p.desc+'</p>'+precioHtml(p,'det-price')+'<div class="det-actions">'+actH+'</div></div>';
   document.getElementById("detOverlay").classList.add("show");
 }
 

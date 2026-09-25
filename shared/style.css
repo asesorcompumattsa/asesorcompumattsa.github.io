@@ -634,3 +634,68 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
 .offers-arrow { flex: 0 0 auto; font-size: 11px; font-weight: 800; white-space: nowrap; }
 @keyframes offersPulse { 0%,100% { box-shadow: 0 8px 18px -8px rgba(238,46,46,.65); } 50% { box-shadow: 0 12px 25px -7px rgba(255,117,24,.9); } }
 @keyframes offersFire { from { transform: translateY(1px) rotate(-5deg) scale(.95); } to { transform: translateY(-2px) rotate(5deg) scale(1.08); } }
+
+/* Precio especial para productos en oferta */
+.prod-price-burst,
+.det-price.price-burst {
+  width: 76px;
+  min-height: 48px;
+  padding: 7px 5px 6px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  color: #ffef3b;
+  background: radial-gradient(circle at 50% 42%, #ef4444 0 28%, #c5162e 29% 68%, #991b1b 69% 100%);
+  clip-path: polygon(50% 0%, 59% 12%, 72% 4%, 76% 18%, 91% 15%, 87% 30%, 100% 39%, 87% 49%, 94% 64%, 78% 66%, 76% 83%, 62% 76%, 50% 100%, 39% 78%, 24% 86%, 21% 69%, 5% 66%, 13% 51%, 0% 40%, 14% 30%, 9% 14%, 25% 18%, 29% 3%, 42% 12%);
+  filter: drop-shadow(0 3px 3px rgba(153,27,27,.30));
+  transform: rotate(-4deg);
+  line-height: 1;
+}
+.prod-price-burst small,
+.det-price.price-burst small {
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+.prod-price-burst strong,
+.det-price.price-burst strong {
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.det-price.price-burst { margin: 0 0 16px; }
+
+/* Banner de eventos: editable desde cada perfil */
+.event-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 13px 16px;
+  overflow: hidden;
+  color: #fff;
+  background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.28), transparent 30%), linear-gradient(120deg, #0b1f3a 0%, #1477d6 58%, #ee2e2e 100%);
+  border-bottom: 3px solid #f59e0b;
+}
+.event-banner::after {
+  content: "";
+  position: absolute;
+  right: -28px;
+  bottom: -42px;
+  width: 125px;
+  height: 80px;
+  border-radius: 50%;
+  border-top: 7px solid rgba(255,193,7,.65);
+  transform: rotate(-12deg);
+}
+.event-flame { flex: 0 0 auto; font-size: 28px; line-height: 1; filter: drop-shadow(0 2px 2px rgba(0,0,0,.25)); animation: eventFlame 1.3s ease-in-out infinite alternate; }
+.event-copy { min-width: 0; display: flex; flex-direction: column; gap: 2px; position: relative; z-index: 1; }
+.event-copy strong { font-family: 'Space Grotesk', sans-serif; font-size: 13px; letter-spacing: .02em; text-transform: uppercase; }
+.event-copy span { font-size: 12px; font-weight: 800; color: #ffef3b; }
+.event-copy small { font-size: 10px; color: rgba(255,255,255,.88); }
+.event-spark { margin-left: auto; color: #ffef3b; font-size: 23px; position: relative; z-index: 1; animation: eventSpark 1.8s ease-in-out infinite; }
+@keyframes eventFlame { from { transform: translateY(1px) rotate(-5deg) scale(.96); } to { transform: translateY(-2px) rotate(5deg) scale(1.08); } }
+@keyframes eventSpark { 0%,100% { opacity: .55; transform: scale(.88) rotate(0deg); } 50% { opacity: 1; transform: scale(1.12) rotate(18deg); } }
