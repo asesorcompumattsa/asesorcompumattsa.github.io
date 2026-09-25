@@ -36,6 +36,12 @@ var SPREADSHEET_ID = "1h86aQIffJN-1KVLpt7DLgGd_MXxoQzMb-wDtXSmj3fk";
 var SHEET_NAME      = "CSGG";
 var API_KEY         = "AIzaSyArcHqRNfyFlOhetUofr8mNOwgGpZz2Kkc";
 
+/* Evento general de Compumatt: se cambia una sola vez para todos los vendedores. */
+var EVENTO_ACTIVO  = true;  // Cambia a false para ocultar el banner
+var EVENTO_TITULO  = "14 aniversario";
+var EVENTO_FECHAS  = "21 al 25 de noviembre 2026";
+var EVENTO_MENSAJE = "Celebramos contigo";
+
 var SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/"
   + SPREADSHEET_ID + "/values/" + encodeURIComponent(SHEET_NAME + "!A:Z")
   + "?key=" + API_KEY;
