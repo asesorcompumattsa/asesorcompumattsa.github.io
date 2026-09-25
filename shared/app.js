@@ -73,6 +73,16 @@ document.addEventListener("DOMContentLoaded", function(){
     pedidoBtn.href = "https://wa.me/" + WA + "?text=" + msgPedido;
   }
 
+  /* --- Compartir/guardarse el enlace del catálogo por WhatsApp --- */
+  var sendCatalogBtn = document.getElementById('sendCatalogBtn');
+  if(sendCatalogBtn){
+    sendCatalogBtn.addEventListener('click', function(){
+      var catalogUrl = window.location.origin + window.location.pathname;
+      var msgCatalogo = 'Hola, quiero guardarme el catálogo de Compumatt para consultarlo después: ' + catalogUrl;
+      window.open('https://wa.me/?text=' + encodeURIComponent(msgCatalogo), '_blank');
+    });
+  }
+
   /* --- Botón "Enviar mensaje" con saludo según la hora --- */
   var sendMessageBtn = document.getElementById('sendMessageBtn');
   if(sendMessageBtn){

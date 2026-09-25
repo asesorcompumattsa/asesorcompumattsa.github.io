@@ -396,6 +396,11 @@
     color:#fff;
   }
   .btn-cyan:hover{ box-shadow: 0 8px 18px -8px rgba(41,182,246,0.55); }
+  .btn-whatsapp-save{
+    background: linear-gradient(120deg, #16a34a 0%, #25D366 100%);
+    color:#fff;
+  }
+  .btn-whatsapp-save:hover{ box-shadow: 0 8px 18px -8px rgba(37,211,102,0.65); }
   .foot{
     text-align:center;
     font-size:11.5px;
