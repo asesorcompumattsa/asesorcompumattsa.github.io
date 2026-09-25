@@ -691,13 +691,14 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
   border-top: 7px solid rgba(255,193,7,.65);
   transform: rotate(-12deg);
 }
-.event-bell { position: relative; flex: 0 0 auto; width: 32px; height: 32px; display: grid; place-items: center; font-size: 27px; line-height: 1; filter: drop-shadow(0 2px 2px rgba(0,0,0,.25)); animation: eventBell 1.8s ease-in-out infinite; }
-.event-bell i { position: absolute; top: 1px; right: 0; width: 10px; height: 10px; border: 2px solid #fff; border-radius: 50%; background: #ef2929; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.event-bell { position: relative; flex: 0 0 auto; width: 36px; height: 36px; display: grid; place-items: center; font-size: 31px; line-height: 1; filter: drop-shadow(0 2px 2px rgba(0,0,0,.25)); animation: eventBell 1.35s ease-in-out infinite; }
+.event-bell i { position: absolute; top: -1px; right: -2px; z-index: 2; display: block; width: 12px; height: 12px; border: 2px solid #fff; border-radius: 50%; background: #ef2929; box-shadow: 0 1px 3px rgba(0,0,0,.35); animation: notificationDot 1.35s ease-in-out infinite; }
 
 .event-copy { min-width: 0; display: flex; flex-direction: column; gap: 2px; position: relative; z-index: 1; }
 .event-copy strong { font-family: 'Space Grotesk', sans-serif; font-size: 13px; letter-spacing: .02em; text-transform: uppercase; }
 .event-copy span { font-size: 12px; font-weight: 800; color: #ffef3b; }
 .event-copy small { font-size: 10px; color: rgba(255,255,255,.88); }
 .event-spark { margin-left: auto; color: #ffef3b; font-size: 23px; position: relative; z-index: 1; animation: eventSpark 1.8s ease-in-out infinite; }
-@keyframes eventBell { 0%,100% { transform: rotate(0deg); } 12% { transform: rotate(10deg); } 24% { transform: rotate(-10deg); } 36% { transform: rotate(6deg); } 48% { transform: rotate(-4deg); } 60% { transform: rotate(0deg); } }
+@keyframes eventBell { 0%,100% { transform: rotate(0deg); } 12% { transform: rotate(13deg); } 24% { transform: rotate(-13deg); } 36% { transform: rotate(8deg); } 48% { transform: rotate(-6deg); } 60% { transform: rotate(0deg); } }
+@keyframes notificationDot { 0%,100% { transform: scale(.92); } 45% { transform: scale(1.12); } }
 @keyframes eventSpark { 0%,100% { opacity: .55; transform: scale(.88) rotate(0deg); } 50% { opacity: 1; transform: scale(1.12) rotate(18deg); } }
