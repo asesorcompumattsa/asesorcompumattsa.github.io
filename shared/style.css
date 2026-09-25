@@ -636,7 +636,7 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
 @keyframes offersFire { from { transform: translateY(1px) rotate(-5deg) scale(.95); } to { transform: translateY(-2px) rotate(5deg) scale(1.08); } }
 
 /* Precio especial para productos en oferta */
-.prod-price-burst,
+.prod-price.price-burst,
 .det-price.price-burst {
   width: 76px;
   min-height: 48px;
@@ -653,13 +653,13 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
   transform: rotate(-4deg);
   line-height: 1;
 }
-.prod-price-burst small,
+.prod-price.price-burst small,
 .det-price.price-burst small {
   font-size: 8px;
   font-weight: 900;
   letter-spacing: .04em;
 }
-.prod-price-burst strong,
+.prod-price.price-burst strong,
 .det-price.price-burst strong {
   font-size: 12px;
   font-weight: 900;
