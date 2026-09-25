@@ -570,41 +570,47 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
 }
 .cat-mascot-welcome {
   position: relative;
-  min-height: 62px;
-  margin: 4px 14px 2px;
-  border-radius: 14px;
+  min-height: 104px;
+  margin: 4px 14px 4px;
+  border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(110deg, rgba(20,119,214,.10), rgba(95,212,244,.22));
+  background: linear-gradient(110deg, rgba(20,119,214,.12), rgba(95,212,244,.28));
   pointer-events: none;
 }
 .cat-mascot-welcome img {
   position: absolute;
-  right: 8px;
-  bottom: -11px;
-  width: 84px;
-  height: 84px;
+  right: 12px;
+  bottom: -14px;
+  width: 116px;
+  height: 116px;
   object-fit: contain;
   animation: mascotFloat 3.2s ease-in-out .75s infinite;
   filter: drop-shadow(0 4px 3px rgba(0,0,0,.16));
 }
 .cat-mascot-welcome .mascot-bubble {
-  top: 16px;
-  left: auto;
-  right: 78px;
-  font-size: 11px;
-  padding: 7px 10px;
+  top: 27px;
+  left: 18px;
+  right: auto;
+  font-size: 12px;
+  padding: 8px 11px;
 }
 .cat-event-banner {
-  margin: 4px 14px 7px;
-  padding: 9px 12px;
-  border-radius: 13px;
+  margin: 2px 20px 8px;
+  padding: 4px 2px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--navy);
+  box-shadow: none;
+  animation: none;
 }
+.cat-event-banner::after { display: none; }
 .cat-event-banner .event-bell { width: 32px; height: 32px; font-size: 27px; }
 .cat-event-banner .event-bell i { width: 11px; height: 11px; }
-.cat-event-banner .event-copy strong { font-size: 11px; }
-.cat-event-banner .event-copy span { font-size: 10px; }
-.cat-event-banner .event-copy small { font-size: 9px; }
-.cat-event-banner .event-spark { font-size: 18px; }
+.cat-event-banner .event-copy strong { font-size: 11px; color: var(--navy); }
+.cat-event-banner .event-copy span { font-size: 10px; color: var(--blue); }
+.cat-event-banner .event-copy small { font-size: 9px; color: var(--slate); }
+.cat-event-banner .event-spark { font-size: 18px; color: var(--red); }
 @keyframes mascotEntrance {
   from { opacity: 0; transform: translateY(18px) scale(.86); }
   to { opacity: 1; transform: translateY(0) scale(1); }
