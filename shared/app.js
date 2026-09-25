@@ -38,9 +38,9 @@ var API_KEY         = "AIzaSyArcHqRNfyFlOhetUofr8mNOwgGpZz2Kkc";
 
 /* Evento general de Compumatt: se cambia una sola vez para todos los vendedores. */
 var EVENTO_ACTIVO  = true;  // Cambia a false para ocultar el banner
-var EVENTO_TITULO  = "Feria Tecnologica";
+var EVENTO_TITULO  = "Feria Tecnológica";
 var EVENTO_FECHAS  = "25 al 30 de noviembre 2026";
-var EVENTO_MENSAJE = "Somos mas que tecnologia";
+var EVENTO_MENSAJE = "Somos más que tecnología";
 
 var SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/"
   + SPREADSHEET_ID + "/values/" + encodeURIComponent(SHEET_NAME + "!A:Z")
@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var openCatalog = document.getElementById("openCatalog");
   var catOverlay = document.getElementById("catOverlay");
   var catClose = document.getElementById("catClose");
+  var catBack = document.getElementById("catBack");
   var catSearch = document.getElementById("catSearch");
   var detOverlay = document.getElementById("detOverlay");
 
@@ -158,11 +159,13 @@ document.addEventListener("DOMContentLoaded", function(){
     var sp = document.querySelector(".seasonParticles");
     if(sp) sp.style.display = "none";
   };
-  if(catClose) catClose.onclick = function(){
+  function cerrarCatalogo(){
     catOverlay.classList.remove("show");
     var sp = document.querySelector(".seasonParticles");
     if(sp) sp.style.display = "";
-  };
+  }
+  if(catClose) catClose.onclick = cerrarCatalogo;
+  if(catBack) catBack.onclick = cerrarCatalogo;
   if(catOverlay) catOverlay.onclick = function(e){
     if(e.target===this){
       this.classList.remove("show");
@@ -218,7 +221,7 @@ function initTema(){
 
   var catTitle = document.getElementById("catTitle");
   if(catTitle){
-    catTitle.textContent = "📦 Catálogo Compumatt " + cfg.emojis[0];
+    catTitle.textContent = "📦 Compumatt " + cfg.emojis[0];
   }
 }
 
@@ -385,6 +388,19 @@ function initMascotaBienvenida() {
     catalogMascot.innerHTML = bubble + '<img src="' + mascotSrc + '" alt="">';
     var catHead = drawer.querySelector(".cat-head");
     drawer.insertBefore(catalogMascot, catHead || drawer.firstChild);
+
+    if(typeof EVENTO_ACTIVO !== "undefined" && EVENTO_ACTIVO){
+      var catEvent = document.createElement("div");
+      catEvent.className = "event-banner cat-event-banner";
+      catEvent.setAttribute("aria-label", EVENTO_TITULO || "Evento Compumatt");
+      catEvent.innerHTML = '<div class="event-bell" aria-hidden="true"><span>🔔</span><i></i></div>'
+        +'<div class="event-copy"><strong></strong><span></span><small></small></div>'
+        +'<div class="event-spark" aria-hidden="true">✦</div>';
+      catEvent.querySelector("strong").textContent = EVENTO_TITULO || "Evento Compumatt";
+      catEvent.querySelector("span").textContent = EVENTO_FECHAS || "Próximamente";
+      catEvent.querySelector("small").textContent = EVENTO_MENSAJE || "";
+      drawer.insertBefore(catEvent, catHead || drawer.firstChild);
+    }
   }
 }
 
