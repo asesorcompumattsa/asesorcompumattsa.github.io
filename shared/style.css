@@ -237,16 +237,29 @@
   .det-pedir:hover{background:#1ebe59;}
 
   .logoBand{
+    position:relative;
     background:#fff;
     padding: 20px 26px 14px;
     text-align:center;
     border-bottom: 1px solid var(--line);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .logoBand::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(rgba(255,255,255,.72),rgba(255,255,255,.72)),url('/shared/local-compumatt.png') center 46%/cover no-repeat;
+    opacity:.9;
+    z-index:-1;
   }
   .logoBand img{
     max-width: 200px;
     width:60%;
     height:auto;
     display:inline-block;
+    position:relative;
+    z-index:1;
   }
   .header{
     position:relative;
