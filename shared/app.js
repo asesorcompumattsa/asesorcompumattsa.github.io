@@ -47,6 +47,42 @@ var SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/"
   + SPREADSHEET_ID + "/values/" + encodeURIComponent(SHEET_NAME + "!A:Z")
   + "?key=" + API_KEY;
 
+/* ──────────────────────────────────────────────────────────────────
+   3) ESTADÍSTICAS INDEPENDIENTES — Google Analytics 4
+   Solo mide visitas e interacciones anónimas; no lee datos de Sheets.
+──────────────────────────────────────────────────────────────────── */
+var GA_MEASUREMENT_ID = "G-QG0LRDGJH6";
+var GA_SOURCE = new URLSearchParams(window.location.search).get("origen") ||
+  (document.referrer ? new URL(document.referrer).hostname : "directo");
+
+function iniciarAnalytics(){
+  if(!GA_MEASUREMENT_ID || window.__compumattAnalyticsReady) return;
+  window.__compumattAnalyticsReady = true;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+  var script = document.createElement("script");
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_MEASUREMENT_ID);
+  document.head.appendChild(script);
+  gtag("js", new Date());
+  gtag("config", GA_MEASUREMENT_ID, {
+    page_title: document.title,
+    page_location: window.location.href,
+    vendedor: typeof NOMBRE_COMPLETO !== "undefined" ? NOMBRE_COMPLETO : "desconocido",
+    origen: GA_SOURCE
+  });
+}
+
+function medir(nombre, parametros){
+  if(typeof window.gtag !== "function") return;
+  var datos = parametros || {};
+  datos.vendedor = typeof NOMBRE_COMPLETO !== "undefined" ? NOMBRE_COMPLETO : "desconocido";
+  datos.origen = GA_SOURCE;
+  window.gtag("event", nombre, datos);
+}
+
+iniciarAnalytics();
+
 var ICONOS = {impresora:"🖨",toner:"🔴",computo:"💻",accesorios:"🔌",oficina:"📂"};
 var todos = [], activeTab = "todos", cargado = false;
 
@@ -57,6 +93,8 @@ var todos = [], activeTab = "todos", cargado = false;
 ══════════════════════════════════════════════════════════════════ */
 
 document.addEventListener("DOMContentLoaded", function(){
+
+  medir("visita_tarjeta_vendedor", {pagina: window.location.pathname});
 
   /* --- Rellenar los datos del vendedor en el HTML --- */
   document.title = (typeof NOMBRE_COMPLETO !== "undefined" ? NOMBRE_COMPLETO : "Compumatt") + " · Compumatt";
@@ -77,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var sendCatalogBtn = document.getElementById('sendCatalogBtn');
   if(sendCatalogBtn){
     sendCatalogBtn.addEventListener('click', function(){
+      medir("enviar_catalogo_whatsapp");
       var catalogUrl = window.location.origin + window.location.pathname;
       var msgCatalogo = 'Hola, quiero guardarme el catálogo de Compumatt para consultarlo después: ' + catalogUrl;
       window.open('https://wa.me/?text=' + encodeURIComponent(msgCatalogo), '_blank');
@@ -87,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var sendMessageBtn = document.getElementById('sendMessageBtn');
   if(sendMessageBtn){
     sendMessageBtn.addEventListener('click', function(){
+      medir("enviar_mensaje_whatsapp");
       var hour = new Date().getHours();
       var greeting;
       if(hour >= 5 && hour < 12){ greeting = 'Buenos días ' + NOMBRE; }
@@ -103,7 +143,10 @@ document.addEventListener("DOMContentLoaded", function(){
   var cancelBtn = document.getElementById('cancelSave');
   var confirmBtn = document.getElementById('confirmSave');
 
-  if(openBtn) openBtn.addEventListener('click', function(){ overlay.classList.add('show'); });
+  if(openBtn) openBtn.addEventListener('click', function(){
+    medir("abrir_guardar_contacto");
+    overlay.classList.add('show');
+  });
   if(cancelBtn) cancelBtn.addEventListener('click', function(){ overlay.classList.remove('show'); });
   if(overlay) overlay.addEventListener('click', function(e){
     if(e.target === overlay){ overlay.classList.remove('show'); }
@@ -136,6 +179,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   if(confirmBtn){
     confirmBtn.addEventListener('click', function(){
+      medir("guardar_contacto");
       var visitorName = document.getElementById('visitorName').value.trim();
       var visitorPhone = document.getElementById('visitorPhone').value.trim();
       downloadMyVCard();
@@ -163,6 +207,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var detOverlay = document.getElementById("detOverlay");
 
   if(openCatalog) openCatalog.onclick = function(){
+    medir("abrir_catalogo");
     catOverlay.classList.add("show");
     catSearch.value = "";
     activeTab = "todos";
@@ -296,6 +341,7 @@ function tabs(){
     b.className="cat-tab"+(c===activeTab?" active":"");
     b.textContent=(c==="todos"?"🗂 Todos":(c==="ofertas"?"🔥 Ofertas":(ICONOS[c]||"📦")+" "+c.charAt(0).toUpperCase()+c.slice(1)));
     b.onclick=function(){
+      medir("filtrar_catalogo", {categoria: c});
       activeTab=c;
       document.querySelectorAll(".cat-tab").forEach(function(x){x.classList.remove("active");});
       b.classList.add("active");
@@ -337,7 +383,14 @@ function grid(){
         +'<p class="prod-name">'+p.nom+'</p>'
         +'<div class="prod-footer">'+precioHtml(p,'prod-price')+actH+'</div>'
       +'</div>';
-    d.onclick=function(){detalle(p);};
+    d.onclick=function(){
+      medir("abrir_producto", {producto: p.nom, categoria: p.cat, estado: p.bdg || "normal"});
+      detalle(p);
+    };
+    var waLink = d.querySelector(".prod-wa");
+    if(waLink) waLink.addEventListener("click", function(){
+      medir("producto_whatsapp", {producto: p.nom, categoria: p.cat});
+    });
     el.appendChild(d);
   });
 }
@@ -370,6 +423,7 @@ function initEvento(){
 }
 
 function mostrarInfoEvento(){
+  medir("abrir_evento", {evento: EVENTO_TITULO || "Evento Compumatt"});
   var anterior=document.querySelector(".event-popover");
   if(anterior){ anterior.remove(); return; }
   var pop=document.createElement("div");
@@ -398,6 +452,7 @@ function mostrarInfoEvento(){
 }
 
 function detalle(p){
+  medir("ver_detalle_producto", {producto: p.nom, categoria: p.cat});
   var waMsg=encodeURIComponent("Hola "+NOMBRE+" 👋, vi el catálogo de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Está disponible?");
   var imgH=p.img
     ?'<div class="det-img"><img src="'+p.img+'" alt="'+p.nom+'" onerror="this.style.display=\'none\'"></div>'
@@ -410,6 +465,10 @@ function detalle(p){
   document.getElementById("detBox").innerHTML=
     imgH+'<div class="det-body"><h3>'+p.nom+'</h3><p>'+p.desc+'</p>'+precioHtml(p,'det-price')+'<div class="det-actions">'+actH+'</div></div>';
   document.getElementById("detOverlay").classList.add("show");
+  var detLink = document.querySelector("#detBox .det-pedir");
+  if(detLink) detLink.addEventListener("click", function(){
+    medir("detalle_producto_whatsapp", {producto: p.nom, categoria: p.cat});
+  });
 }
 
 
