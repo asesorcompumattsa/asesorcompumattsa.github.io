@@ -206,14 +206,18 @@ document.addEventListener("DOMContentLoaded", function(){
   var catSearch = document.getElementById("catSearch");
   var detOverlay = document.getElementById("detOverlay");
 
-  if(openCatalog) openCatalog.onclick = function(){
-    medir("abrir_catalogo");
+  function abrirCatalogoInicial(categoria){
+    medir("abrir_catalogo", {modo: "desde_landing", categoria: categoria || "todos"});
     catOverlay.classList.add("show");
     catSearch.value = "";
-    activeTab = "todos";
+    activeTab = categoria || "todos";
     if(!cargado) cargar(); else { tabs(); grid(); }
     var sp = document.querySelector(".seasonParticles");
     if(sp) sp.style.display = "none";
+  }
+
+  if(openCatalog) openCatalog.onclick = function(){
+    abrirCatalogoInicial("todos");
   };
   function cerrarCatalogo(){
     catOverlay.classList.remove("show");
@@ -236,6 +240,13 @@ document.addEventListener("DOMContentLoaded", function(){
 
   /* Cargar el catálogo al entrar para detectar y habilitar ofertas especiales. */
   if(!cargado) cargar();
+
+  var params = new URLSearchParams(window.location.search);
+  if(params.get("abrir") === "1"){
+    var categoriaInicial = params.get("categoria") || "todos";
+    if(categoriaInicial === "impresoras") categoriaInicial = "impresora";
+    setTimeout(function(){ abrirCatalogoInicial(categoriaInicial); }, 250);
+  }
 
 });
 
