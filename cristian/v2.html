@@ -43,12 +43,25 @@
   .overlay{background:#020817bb;backdrop-filter:blur(10px)}.modal{background:#081d3d;color:#fff;border:1px solid #13c7ff77}.modal h2,.field label{color:#fff}.modal p.sub{color:#b8d1e9}.field input{background:#04132b;color:#fff;border-color:#2f638e}.btn-ghost{background:#102545;color:#d9edff;border-color:#477096}
   .cat-overlay{background:#020817cc;backdrop-filter:blur(10px)}.cat-drawer{background:#061630;border:1px solid #1cbcfb66}.cat-back{color:#59d8ff}.cat-close{background:#12345a;color:#d7f3ff}.cat-search-w input{background:#0c2448;color:#fff;border:1px solid #2b638e}.cat-tab{background:#0c2448;color:#bcd8ef}.cat-tab.active{background:#0a9fe9;color:#fff}.cat-grid{background:#061630}.prod-card{background:#0a2244;border:1px solid #1e5985;box-shadow:0 4px 13px #0004}.prod-name{color:#eaf7ff}.prod-price{color:#6cddff}.prod-img-w{background:#071a35}.det-box{background:#081d3d;border:1px solid #21bdf477}.det-body h3{color:#fff}.det-body p{color:#bdd3e8}.det-back{background:#102545;color:#dceeff}.det-price{color:#6cddff}.cat-mascot-welcome{background:linear-gradient(110deg,#0a315f,#0b6a8c);border:1px solid #13c7ff44}.cat-drawer .prod-img-w{background:#f2f5f8}.cat-drawer .prod-img-w img{object-fit:contain;padding:8px}
   .cat-drawer .cat-event-banner .event-copy strong,.cat-drawer .cat-event-banner .event-copy span,.cat-drawer .cat-event-banner .event-copy small{color:#fff!important}
+  .halloween-v2 .header{background:linear-gradient(135deg,#17143d 0%,#3b1d61 58%,#713514 100%)}
+  .halloween-v2 .event-banner{border-color:#ff7a1aaa;box-shadow:0 0 22px #ff7a1a33,inset 0 0 20px #ff7a1a18}
+  .halloween-decor{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+  .halloween-decor span{position:absolute;display:block;filter:drop-shadow(0 5px 5px #0008);user-select:none}
+  .halloween-web{top:138px;left:2px;font-size:47px;opacity:.72;transform:rotate(-18deg)}
+  .halloween-pumpkin-a{top:285px;right:9px;font-size:38px;animation:halloweenBounce 2.4s ease-in-out infinite}
+  .halloween-pumpkin-b{top:520px;left:8px;font-size:31px;animation:halloweenBounce 2.8s ease-in-out .4s infinite}
+  .halloween-ghost-a{top:202px;left:8px;font-size:30px;opacity:.85;animation:halloweenFloat 3.5s ease-in-out .2s infinite}
+  .halloween-ghost-b{top:735px;right:6px;font-size:27px;opacity:.8;animation:halloweenFloat 3.8s ease-in-out .7s infinite}
+  @keyframes halloweenBounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(5deg)}}
+  @keyframes halloweenFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-13px) rotate(3deg)}}
+  @media(prefers-reduced-motion:reduce){.halloween-decor span{animation:none}}
   @media(max-width:430px){.header{padding-right:126px;margin-left:12px;margin-right:12px}.body{padding-left:12px;padding-right:12px}.event-banner{margin-left:12px;margin-right:12px}.logoBand{height:132px}.card-mascot-welcome{transform:scale(.9);right:-3px}}
   @media(prefers-reduced-motion:reduce){.card-mascot-welcome img,.offers-banner,.offers-fire{animation:none}}
 </style>
 </head>
-<body>
+<body class="halloween-v2">
 <div class="card">
+  <div class="halloween-decor" aria-hidden="true"><span class="halloween-web">🕸️</span><span class="halloween-ghost-a">👻</span><span class="halloween-ghost-b">👻</span><span class="halloween-pumpkin-a">🎃</span><span class="halloween-pumpkin-b">🎃</span></div>
   <div class="logoBand"><img src="/shared/logo-compumatt-transparent.png" alt="Compumatt"></div>
   <div class="event-banner" id="eventBanner" hidden aria-live="polite">
     <div class="event-bell" aria-hidden="true"><span>🔔</span><i></i></div>
