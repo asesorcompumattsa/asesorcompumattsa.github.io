@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayling | Compumatt — Tarjeta digital V2</title>
+<meta name="description" content="Tarjeta digital futurista de Ayling en Compumatt: eventos, promociones, catálogo y WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Compumatt">
+<meta property="og:title" content="Ayling | Compumatt — Tarjeta digital">
+<meta property="og:description" content="Eventos, promociones, catálogo y contacto directo por WhatsApp.">
+<meta property="og:url" content="https://asesorcompumattsa.github.io/ayling/v2.html">
+<meta property="og:image" content="https://asesorcompumattsa.github.io/shared/logo-compumatt-transparent.png">
+<meta name="theme-color" content="#06122e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared/style.css?v=20260925-10">
+<style>
+  :root{--v2-bg:#020817;--v2-panel:#071b3b;--v2-cyan:#13c7ff;--v2-blue:#1677e8;--v2-red:#f21f3f;--v2-text:#f5fbff;--v2-muted:#a6c5e4}
+  html,body{min-height:100%;background:var(--v2-bg)}
+  body{display:block;padding:0;color:var(--v2-text);font-family:Inter,sans-serif;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 8%,#0d5aa855,transparent 28%),radial-gradient(circle at 90% 72%,#e7193d1c,transparent 30%),linear-gradient(125deg,transparent 0 42%,#0db9f30e 43% 44%,transparent 45% 100%);z-index:0}
+  .card{position:relative;z-index:1;width:min(100%,620px);max-width:620px;margin:0 auto;background:linear-gradient(180deg,#06122e 0%,#051531 52%,#020817 100%);border:0;border-radius:0;box-shadow:none;overflow:hidden;animation:none}
+  .card::after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid #12bfff22;background:linear-gradient(110deg,transparent 0 45%,#12bfff0d 46% 46.5%,transparent 47% 100%);z-index:0}
+  .logoBand{position:relative;z-index:1;height:150px;padding:22px 24px 18px;border:0;border-bottom:1px solid #4cd8ff55;background:#06122e;display:flex;align-items:center;justify-content:center;isolation:isolate}
+  .logoBand::before{background:linear-gradient(90deg,rgba(2,8,23,.48),rgba(2,8,23,.64)),url('/shared/local-compumatt.png') center/cover no-repeat;opacity:1;filter:saturate(1.05)}
+  .logoBand::after{content:"";position:absolute;inset:auto 9% 0;height:2px;background:linear-gradient(90deg,transparent,var(--v2-cyan),var(--v2-red),transparent);box-shadow:0 0 18px var(--v2-cyan);z-index:1}
+  .logoBand img{width:min(58%,250px);max-width:250px;mix-blend-mode:normal;filter:drop-shadow(0 0 15px #13c7ff99);z-index:2}
+  .event-banner{position:relative;z-index:3;margin:14px 18px 0;padding:12px 14px;border:1px solid #ff365c99;border-radius:16px;background:linear-gradient(115deg,#52132eaa,#122b59dd 58%,#07315cdd);box-shadow:0 0 22px #f21f3f33, inset 0 0 20px #13c7ff12;color:#fff}
+  .event-banner[hidden]{display:none}
+  .event-banner::after{content:"";position:absolute;inset:-1px;border-radius:16px;border:1px solid #13c7ff66;clip-path:polygon(0 0,35% 0,35% 2px,65% 2px,65% 0,100% 0,100% 100%,0 100%);pointer-events:none}
+  .event-bell{width:42px;height:42px;flex:0 0 42px}.event-bell span{font-size:30px;filter:drop-shadow(0 0 7px #ff3b58)}
+  .event-bell i{width:11px;height:11px;background:#ff2448;border:2px solid #fff;box-shadow:0 0 10px #ff2448}
+  .event-copy strong{font-family:"Space Grotesk",sans-serif;letter-spacing:.03em;color:#fff}.event-copy span{color:#fff}.event-copy small{color:#fff}
+  .header{position:relative;z-index:1;margin:14px 18px 0;padding:28px 150px 30px 24px;min-height:206px;border:1px solid #238edc88;border-radius:24px;background:linear-gradient(135deg,#0a1e49 0%,#0a3970 58%,#056f9a 100%);box-shadow:0 18px 40px #0007,inset 0 0 28px #13c7ff19;overflow:hidden}
+  .header::before{content:"";position:absolute;inset:auto -50px -85px auto;width:250px;height:250px;border:20px solid #ffffff18;border-radius:50%;border-left-color:transparent;transform:rotate(-25deg)}
+  .header::after{content:"";position:absolute;left:22px;right:22px;bottom:14px;height:1px;background:linear-gradient(90deg,transparent,#13c7ff,transparent)}
+  .swoosh,.swoosh2{opacity:.35}.eyebrow{color:#8ceaff}.name{font-size:clamp(28px,7vw,40px);text-shadow:0 0 15px #13c7ff66}.role{color:#d6f3ff}.brandline{margin-top:22px}.brandline span{color:#fff}.brandline .mark{border-color:#fff;border-right-color:var(--v2-red);border-top-color:var(--v2-cyan)}
+  .body{position:relative;z-index:1;padding:18px 18px 30px}.phone{background:#081d3d;border:1px solid #3c9edc66;color:var(--v2-muted);border-radius:14px;box-shadow:inset 0 0 15px #13c7ff0b}.phone strong{color:#fff}
+  .offers-banner{margin:14px 0 0;border:1px solid #ffcf38aa;background:linear-gradient(115deg,#96152c,#f1263f 55%,#c37408);box-shadow:0 8px 24px #f21f3f44}.offers-banner:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .actions{gap:10px}.btn{min-height:50px;border-radius:14px;border:1px solid #ffffff24;box-shadow:0 8px 18px #0004;font-weight:800}.btn-red{background:linear-gradient(120deg,#f21f3f,#a50d2a)}.btn-whatsapp-save{background:linear-gradient(120deg,#0d9445,#1ed760)}.btn-cyan{background:linear-gradient(120deg,#087de8,#11c5eb)}.btn-special{background:#102545;color:#dceeff;border-color:#4a6b8f}.btn-primary{background:linear-gradient(120deg,#102b5d,#157ee5)}
+  .foot{color:#85a9cb}.card-mascot-welcome{top:20px;right:5px;transform:scale(1.06);transform-origin:top right}.card-mascot-welcome .mascot-bubble{border-color:#13c7ff;background:#eefaff;color:#06122e}
+  .overlay{background:#020817bb;backdrop-filter:blur(10px)}.modal{background:#081d3d;color:#fff;border:1px solid #13c7ff77}.modal h2,.field label{color:#fff}.modal p.sub{color:#b8d1e9}.field input{background:#04132b;color:#fff;border-color:#2f638e}.btn-ghost{background:#102545;color:#d9edff;border-color:#477096}
+  .cat-overlay{background:#020817cc;backdrop-filter:blur(10px)}.cat-drawer{background:#061630;border:1px solid #1cbcfb66}.cat-back{color:#59d8ff}.cat-close{background:#12345a;color:#d7f3ff}.cat-search-w input{background:#0c2448;color:#fff;border:1px solid #2b638e}.cat-tab{background:#0c2448;color:#bcd8ef}.cat-tab.active{background:#0a9fe9;color:#fff}.cat-grid{background:#061630}.prod-card{background:#0a2244;border:1px solid #1e5985;box-shadow:0 4px 13px #0004}.prod-name{color:#eaf7ff}.prod-price{color:#6cddff}.prod-img-w{background:#071a35}.det-box{background:#081d3d;border:1px solid #21bdf477}.det-body h3{color:#fff}.det-body p{color:#bdd3e8}.det-back{background:#102545;color:#dceeff}.det-price{color:#6cddff}.cat-mascot-welcome{background:linear-gradient(110deg,#0a315f,#0b6a8c);border:1px solid #13c7ff44}.cat-drawer .prod-img-w{background:#f2f5f8}.cat-drawer .prod-img-w img{object-fit:contain;padding:8px}
+  .cat-drawer .cat-event-banner .event-copy strong,.cat-drawer .cat-event-banner .event-copy span,.cat-drawer .cat-event-banner .event-copy small{color:#fff!important}
+  .halloween-v2 .header{background:linear-gradient(135deg,#17143d 0%,#3b1d61 58%,#713514 100%)}
+  .halloween-v2 .event-banner{border-color:#ff7a1aaa;box-shadow:0 0 22px #ff7a1a33,inset 0 0 20px #ff7a1a18}
+  .halloween-decor{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+  .halloween-decor span{position:absolute;display:block;filter:drop-shadow(0 5px 5px #0008);user-select:none}
+  .halloween-web{top:138px;left:2px;font-size:47px;opacity:.72;transform:rotate(-18deg)}
+  .halloween-pumpkin-a{top:285px;right:9px;font-size:38px;animation:halloweenBounce 2.4s ease-in-out infinite}
+  .halloween-pumpkin-b{top:520px;left:8px;font-size:31px;animation:halloweenBounce 2.8s ease-in-out .4s infinite}
+  .halloween-ghost-a{top:202px;left:8px;font-size:30px;opacity:.85;animation:halloweenFloat 3.5s ease-in-out .2s infinite}
+  .halloween-ghost-b{top:735px;right:6px;font-size:27px;opacity:.8;animation:halloweenFloat 3.8s ease-in-out .7s infinite}
+  @keyframes halloweenBounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(5deg)}}
+  @keyframes halloweenFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-13px) rotate(3deg)}}
+  .halloween-catalog-decor{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden;border-radius:24px 24px 0 0}
+  .halloween-catalog-decor span{position:absolute;filter:drop-shadow(0 3px 4px #0009);opacity:.9}
+  .halloween-catalog-web{top:7px;right:8px;font-size:33px;transform:rotate(12deg);opacity:.65!important}
+  .halloween-catalog-pumpkin{top:42px;left:8px;font-size:23px;animation:halloweenBounce 2.7s ease-in-out infinite}
+  .halloween-catalog-ghost{top:42px;right:47px;font-size:21px;animation:halloweenFloat 3.4s ease-in-out .5s infinite}
+  .halloween-v2 .cat-drawer{background:linear-gradient(180deg,#150e32 0%,#061630 22%,#061630 100%);border-color:#ff7a1a88;box-shadow:0 -12px 50px #ff7a1a22}
+  .halloween-v2 .cat-head,.halloween-v2 .cat-search-w,.halloween-v2 .cat-tabs{position:relative;z-index:5}
+  @media(prefers-reduced-motion:reduce){.halloween-decor span{animation:none}}
+  @media(max-width:430px){.header{padding-right:126px;margin-left:12px;margin-right:12px}.body{padding-left:12px;padding-right:12px}.event-banner{margin-left:12px;margin-right:12px}.logoBand{height:132px}.card-mascot-welcome{transform:scale(.9);right:-3px}}
+  @media(prefers-reduced-motion:reduce){.card-mascot-welcome img,.offers-banner,.offers-fire{animation:none}}
+</style>
+</head>
+<body class="halloween-v2">
+<div class="card">
+  <div class="halloween-decor" aria-hidden="true"><span class="halloween-web">🕸️</span><span class="halloween-ghost-a">👻</span><span class="halloween-ghost-b">👻</span><span class="halloween-pumpkin-a">🎃</span><span class="halloween-pumpkin-b">🎃</span></div>
+  <div class="logoBand"><img src="/shared/logo-compumatt-transparent.png" alt="Compumatt"></div>
+  <div class="event-banner" id="eventBanner" hidden aria-live="polite">
+    <div class="event-bell" aria-hidden="true"><span>🔔</span><i></i></div>
+    <div class="event-copy"><strong id="eventTitle"></strong><span id="eventDates"></span><small id="eventSubtitle"></small></div>
+    <div class="event-spark" aria-hidden="true">✦</div>
+  </div>
+  <div class="header">
+    <div class="swoosh"></div><div class="swoosh2"></div>
+    <p class="eyebrow" id="vendorRole">Asesora de ventas</p>
+    <h1 class="name" id="vendorName">Ayling Torrez</h1>
+    <p class="role">Equipos de oficina &amp; tecnología</p>
+    <div class="brandline"><div class="mark"></div><span>COMPUMATT</span></div>
+  </div>
+  <div class="body">
+    <div class="phone">📞 &nbsp;Línea corporativa: <strong id="vendorPhone">+505 8785 2155</strong></div>
+    <div class="actions">
+      <button type="button" class="btn btn-red" id="openCatalog">📦 Ver catálogo completo</button>
+      <div id="offersBanner" class="offers-banner" hidden role="button" tabindex="0" aria-label="Ver productos en oferta"><div class="offers-fire">🔥</div><div class="offers-copy"><strong>¡OFERTAS ESPECIALES!</strong><span>Descuentos por tiempo limitado</span></div><div class="offers-arrow">Ver ofertas&nbsp; →</div></div>
+      <button type="button" class="btn btn-whatsapp-save" id="sendCatalogBtn">📲 Enviarme el catálogo por WhatsApp</button>
+      <button type="button" class="btn btn-cyan" id="sendMessageBtn">✉️ Enviar mensaje</button>
+    </div>
+    <p class="foot">Compumatt de Nicaragua S.A.<br>Escanea, guarda o escribe — lo que necesites.</p>
+  </div>
+</div>
+<div class="overlay" id="saveOverlay"><div class="modal"><h2>Guarda mi contacto</h2><p class="sub">Déjame tu nombre y teléfono para descargar mi tarjeta — y de una vez te guardo también como contacto mío por WhatsApp.</p><div class="field"><label for="visitorName">Tu nombre</label><input type="text" id="visitorName" placeholder="Ej. María Pérez"></div><div class="field"><label for="visitorPhone">Tu teléfono (WhatsApp)</label><input type="tel" id="visitorPhone" placeholder="Ej. 8888 8888"></div><div class="modal-actions"><button type="button" class="btn btn-ghost" id="cancelSave">Cancelar</button><button type="button" class="btn btn-primary" id="confirmSave">Guardar</button></div></div></div>
+<div class="cat-overlay" id="catOverlay"><div class="cat-drawer"><div class="halloween-catalog-decor" aria-hidden="true"><span class="halloween-catalog-web">🕸️</span><span class="halloween-catalog-pumpkin">🎃</span><span class="halloween-catalog-ghost">👻</span></div><div class="cat-handle"></div><div class="cat-head"><button class="cat-back" id="catBack" type="button">← Volver</button><button class="cat-close" id="catClose" type="button">✕</button></div><div class="cat-search-w"><input type="text" id="catSearch" placeholder="🔍 Buscar producto..."></div><div class="cat-tabs" id="catTabs"></div><div class="cat-grid" id="catGrid"></div></div></div>
+<div class="det-overlay" id="detOverlay"><div class="det-box" id="detBox"></div></div>
+<script>
+var NOMBRE="Ayling";var NOMBRE_COMPLETO="Ayling Torrez";var ROL="Asesora de ventas";var TEL="+505 8785 2155";var WA="50587852155";
+</script>
+<script src="/shared/app.js?v=20260929-3"></script>
+</body>
+</html>
