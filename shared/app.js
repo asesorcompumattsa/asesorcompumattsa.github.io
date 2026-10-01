@@ -328,14 +328,12 @@ function gvizRows(raw){
   var ini=raw.indexOf("{"), fin=raw.lastIndexOf("}");
   if(ini<0 || fin<ini) throw new Error("respuesta de Sheets inválida");
   var table=JSON.parse(raw.slice(ini,fin+1)).table, cols=table.cols||[];
-  var rows=[cols.map(function(c){return c.label||c.id||"";})];
+  var rows=[];
   (table.rows||[]).forEach(function(row){
     var cells=row.c||[];
     rows.push(cols.map(function(_,i){var cell=cells[i];return cell&&cell.v!==null&&cell.v!==undefined?String(cell.v):"";}));
   });
-  var primera=(rows[1]||[]).map(function(v){return (v||"").toLowerCase();});
-  var tieneEncabezado=primera.indexOf("categoria")>=0 || primera.indexOf("servicio")>=0 || primera.indexOf("nombre")>=0;
-  return tieneEncabezado ? [rows[1]].concat(rows.slice(2)) : rows.slice(1);
+  return rows;
 }
 
 function parsear(filasCrudas){
