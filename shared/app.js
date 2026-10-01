@@ -222,6 +222,11 @@ document.addEventListener("DOMContentLoaded", function(){
   if(openCatalog) openCatalog.onclick = function(){
     abrirCatalogoInicial("todos");
   };
+  var tallerFab = document.getElementById("tallerFab");
+  if(tallerFab) tallerFab.onclick = function(){
+    medir("abrir_servicios_tecnicos", {origen: "burbuja_flotante"});
+    abrirCatalogoInicial("servicios");
+  };
   function cerrarCatalogo(){
     catOverlay.classList.remove("show");
     var sp = document.querySelector(".seasonParticles");
