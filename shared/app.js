@@ -441,7 +441,7 @@ function grid(){
   var bLbl={nuevo:"✨ Nuevo",oferta:"🔥 Oferta",agotado:"❌ Agotado"};
   lista.forEach(function(p){
     var d=document.createElement("div");
-    d.className="prod-card";
+    d.className="prod-card"+(p.cat==="servicios"?" service-card":"");
     var imgH=p.img
       ?'<img src="'+p.img+'" alt="'+p.nom+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
        +'<div class="prod-ph" style="display:none">'+p.ico+'</div>'
