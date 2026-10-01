@@ -43,9 +43,12 @@ var EVENTO_FECHAS  = "25 al 30 de noviembre 2026";
 var EVENTO_MENSAJE = "Somos más que tecnología";
 var EVENTO_DETALLE = "Ven a nuestra Feria Tecnológica y disfruta de nuestros descuentos, promociones y sorpresas especiales.";
 
-var SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/"
-  + SPREADSHEET_ID + "/values/" + encodeURIComponent(SHEET_NAME + "!A:Z")
-  + "?key=" + API_KEY;
+var SHEET_URL = "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID
+  + "/gviz/tq?tqx=out:json&sheet=" + encodeURIComponent(SHEET_NAME);
+var SERVICES_SHEET_NAME = "SERVICIOS_TECNICOS";
+var SERVICES_SHEET_URL = "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID
+  + "/gviz/tq?tqx=out:json&sheet=" + encodeURIComponent(SERVICES_SHEET_NAME);
+var TALLER_WA = "50582493098";
 
 /* ──────────────────────────────────────────────────────────────────
    3) ESTADÍSTICAS INDEPENDIENTES — Google Analytics 4
@@ -83,8 +86,8 @@ function medir(nombre, parametros){
 
 iniciarAnalytics();
 
-var ICONOS = {impresora:"🖨",toner:"🔴",computo:"💻",accesorios:"🔌",oficina:"📂"};
-var todos = [], activeTab = "todos", cargado = false;
+var ICONOS = {impresora:"🖨",toner:"🔴",computo:"💻",accesorios:"🔌",oficina:"📂",servicios:"🛠️"};
+var todos = [], servicios = [], activeTab = "todos", cargado = false, serviciosCargados = false;
 
 /* ══════════════════════════════════════════════════════════════════
    A PARTIR DE ACÁ: lógica general. No hace falta tocar nada de lo
@@ -238,8 +241,9 @@ document.addEventListener("DOMContentLoaded", function(){
   };
   if(catSearch) catSearch.oninput = grid;
 
-  /* Cargar el catálogo al entrar para detectar y habilitar ofertas especiales. */
+  /* Cargar productos y servicios al entrar, sin mezclar ambas fuentes. */
   if(!cargado) cargar();
+  cargarServicios();
 
   var params = new URLSearchParams(window.location.search);
   if(params.get("abrir") === "1"){
@@ -296,10 +300,9 @@ function cargar(){
   var g = document.getElementById("catGrid");
   g.innerHTML = '<div class="cat-loading"><div class="cat-spinner"></div><p>Cargando catálogo...</p></div>';
   fetch(SHEET_URL)
-    .then(function(r){ return r.json(); })
+    .then(function(r){ return r.text(); })
     .then(function(data){
-      if(!data.values){ throw new Error("sin datos"); }
-      todos = parsear(data.values);
+      todos = parsear(gvizRows(data));
       actualizarBannerOfertas();
       cargado = true;
       tabs(); grid();
@@ -307,6 +310,32 @@ function cargar(){
     .catch(function(){
       g.innerHTML = '<div class="cat-error">❌ No se pudo cargar el catálogo.<br>Verifica la API Key, el nombre de la hoja y los permisos de acceso.</div>';
     });
+}
+
+function cargarServicios(){
+  fetch(SERVICES_SHEET_URL)
+    .then(function(r){ return r.text(); })
+    .then(function(data){
+      servicios = parsearServicios(gvizRows(data));
+      serviciosCargados = true;
+      tabs();
+      if(activeTab === "servicios") grid();
+    })
+    .catch(function(){ servicios = []; serviciosCargados = true; tabs(); });
+}
+
+function gvizRows(raw){
+  var ini=raw.indexOf("{"), fin=raw.lastIndexOf("}");
+  if(ini<0 || fin<ini) throw new Error("respuesta de Sheets inválida");
+  var table=JSON.parse(raw.slice(ini,fin+1)).table, cols=table.cols||[];
+  var rows=[cols.map(function(c){return c.label||c.id||"";})];
+  (table.rows||[]).forEach(function(row){
+    var cells=row.c||[];
+    rows.push(cols.map(function(_,i){var cell=cells[i];return cell&&cell.v!==null&&cell.v!==undefined?String(cell.v):"";}));
+  });
+  var primera=(rows[1]||[]).map(function(v){return (v||"").toLowerCase();});
+  var tieneEncabezado=primera.indexOf("categoria")>=0 || primera.indexOf("servicio")>=0 || primera.indexOf("nombre")>=0;
+  return tieneEncabezado ? [rows[1]].concat(rows.slice(2)) : rows.slice(1);
 }
 
 function parsear(filasCrudas){
@@ -341,16 +370,46 @@ function parsear(filasCrudas){
   return lista;
 }
 
+function parsearServicios(filasCrudas){
+  var filas=(filasCrudas||[]).filter(function(f){return f && f.some(function(v){return (v||"").trim()!=="";});});
+  if(filas.length<2) return [];
+  var enc=filas[0].map(function(h){return (h||"").trim().toLowerCase();});
+  function col(){
+    for(var i=0;i<arguments.length;i++){var n=enc.indexOf(arguments[i]);if(n>=0)return n;}
+    return -1;
+  }
+  var tieneEncabezados=enc.indexOf("servicio")>=0 || enc.indexOf("nombre")>=0;
+  var iNom=tieneEncabezados?col("servicio","nombre"):0,
+      iDesc=tieneEncabezados?col("descripción","descripcion"):1,
+      iPre=tieneEncabezados?col("precio"):2,
+      iImg=tieneEncabezados?col("imagen","imagen_url"):3,
+      iAct=tieneEncabezados?col("estado","activo"):4,
+      iIco=tieneEncabezados?col("icono"):-1;
+  var inicio=tieneEncabezados?1:0;
+  var lista=[];
+  for(var i=inicio;i<filas.length;i++){
+    var c=filas[i], nom=iNom>=0?(c[iNom]||"").trim():"";
+    if(!nom) continue;
+    var act=iAct>=0?(c[iAct]||"").trim().toUpperCase():"SI";
+    if(act==="NO" || act==="INACTIVO") continue;
+    lista.push({cat:"servicios",nom:nom,desc:iDesc>=0?(c[iDesc]||"").trim():"",
+      pre:iPre>=0?(c[iPre]||"").trim():"Consultar",img:iImg>=0?(c[iImg]||"").trim():"",
+      bdg:"",ico:iIco>=0?(c[iIco]||"🛠️").trim():"🛠️"});
+  }
+  return lista;
+}
+
 function tabs(){
   var cats=["todos"];
   todos.forEach(function(p){if(cats.indexOf(p.cat)<0)cats.push(p.cat);});
+  if(servicios.length) cats.push("servicios");
   if(todos.some(function(p){return p.bdg === "oferta";})) cats.push("ofertas");
   var el=document.getElementById("catTabs");
   el.innerHTML="";
   cats.forEach(function(c){
     var b=document.createElement("button");
     b.className="cat-tab"+(c===activeTab?" active":"");
-    b.textContent=(c==="todos"?"🗂 Todos":(c==="ofertas"?"🔥 Ofertas":(ICONOS[c]||"📦")+" "+c.charAt(0).toUpperCase()+c.slice(1)));
+    b.textContent=(c==="todos"?"🗂 Todos":(c==="ofertas"?"🔥 Ofertas":(c==="servicios"?"🛠️ Servicios Técnicos":(ICONOS[c]||"📦")+" "+c.charAt(0).toUpperCase()+c.slice(1))));
     b.onclick=function(){
       medir("filtrar_catalogo", {categoria: c});
       activeTab=c;
@@ -364,10 +423,11 @@ function tabs(){
 
 function grid(){
   var q=document.getElementById("catSearch").value.toLowerCase().trim();
-  var lista=todos.filter(function(p){
+  var fuente=activeTab==="servicios"?servicios:todos;
+  var lista=fuente.filter(function(p){
     var perteneceATab = activeTab === "ofertas"
       ? p.bdg === "oferta"
-      : (activeTab === "todos" || p.cat === activeTab);
+      : (activeTab === "todos" || p.cat === activeTab || activeTab === "servicios");
     return perteneceATab
         &&(!q||p.nom.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));
   });
@@ -384,10 +444,13 @@ function grid(){
        +'<div class="prod-ph" style="display:none">'+p.ico+'</div>'
       :'<div class="prod-ph">'+p.ico+'</div>';
     var bdgH=p.bdg&&bLbl[p.bdg]?'<div class="prod-bdg-w"><span class="prod-bdg '+p.bdg+'">'+bLbl[p.bdg]+'</span></div>':"";
-    var waMsg=encodeURIComponent("Hola "+NOMBRE+" 👋, vi el catálogo de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Está disponible?");
+    var contactoWa=p.cat==="servicios"?TALLER_WA:WA;
+    var waMsg=encodeURIComponent(p.cat==="servicios"
+      ? "Hola, vi los Servicios Técnicos de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Me pueden brindar información?"
+      : "Hola "+NOMBRE+" 👋, vi el catálogo de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Está disponible?");
     var actH=p.bdg==="agotado"
       ?'<span class="prod-agotado">Sin stock</span>'
-      :'<a class="prod-wa" href="https://wa.me/'+WA+'?text='+waMsg+'" target="_blank" onclick="event.stopPropagation()">💬</a>';
+      :'<a class="prod-wa" href="https://wa.me/'+contactoWa+'?text='+waMsg+'" target="_blank" onclick="event.stopPropagation()">💬</a>';
     d.innerHTML=
       '<div class="prod-img-w">'+imgH+bdgH+'</div>'
       +'<div class="prod-body">'
@@ -464,7 +527,10 @@ function mostrarInfoEvento(){
 
 function detalle(p){
   medir("ver_detalle_producto", {producto: p.nom, categoria: p.cat});
-  var waMsg=encodeURIComponent("Hola "+NOMBRE+" 👋, vi el catálogo de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Está disponible?");
+  var contactoWa=p.cat==="servicios"?TALLER_WA:WA;
+  var waMsg=encodeURIComponent(p.cat==="servicios"
+    ? "Hola, vi los Servicios Técnicos de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Me pueden brindar información?"
+    : "Hola "+NOMBRE+" 👋, vi el catálogo de Compumatt y me interesa:\n\n▪ *"+p.nom+"*\n▪ Precio: "+p.pre+"\n\n¿Está disponible?");
   var imgH=p.img
     ?'<div class="det-img"><img src="'+p.img+'" alt="'+p.nom+'" onerror="this.style.display=\'none\'"></div>'
     :'<div class="det-img"><div class="det-img-ph">'+p.ico+'</div></div>';
@@ -472,7 +538,7 @@ function detalle(p){
     ?'<button class="det-back" onclick="document.getElementById(\'detOverlay\').classList.remove(\'show\')">← Volver</button>'
      +'<span style="font-size:13px;font-weight:800;color:#dc2626">❌ Sin stock</span>'
     :'<button class="det-back" onclick="document.getElementById(\'detOverlay\').classList.remove(\'show\')">← Volver</button>'
-     +'<a class="det-pedir" href="https://wa.me/'+WA+'?text='+waMsg+'" target="_blank">💬 Pedir por WhatsApp</a>';
+     +'<a class="det-pedir" href="https://wa.me/'+contactoWa+'?text='+waMsg+'" target="_blank">💬 '+(p.cat==="servicios"?"Consultar al taller":"Pedir por WhatsApp")+'</a>';
   document.getElementById("detBox").innerHTML=
     imgH+'<div class="det-body"><h3>'+p.nom+'</h3><p>'+p.desc+'</p>'+precioHtml(p,'det-price')+'<div class="det-actions">'+actH+'</div></div>';
   document.getElementById("detOverlay").classList.add("show");
