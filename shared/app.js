@@ -555,13 +555,13 @@ function detalle(p){
 /* Inyecta la mascota desde el motor compartido para todos los vendedores. */
 function initMascotaBienvenida() {
   var mascotSrc = "/shared/mascota_final.png";
-  var bubble = '<span class="mascot-bubble">¡Bienvenido!</span>';
+  var bubble = '<span class="mascot-bubble">Centro de Servicio</span>';
 
   var header = document.querySelector(".header");
   if (header && !header.querySelector(".card-mascot-welcome")) {
     var cardMascot = document.createElement("div");
     cardMascot.className = "card-mascot-welcome";
-    cardMascot.setAttribute("aria-label", "Mascota de Compumatt: ¡Bienvenido!");
+    cardMascot.setAttribute("aria-label", "Mascota de Compumatt: Centro de Servicio");
     cardMascot.innerHTML = bubble + '<img src="' + mascotSrc + '" alt="Mascota Compumatt">';
     header.appendChild(cardMascot);
   }
@@ -570,7 +570,7 @@ function initMascotaBienvenida() {
   if (drawer && !drawer.querySelector(".cat-mascot-welcome")) {
     var catalogMascot = document.createElement("div");
     catalogMascot.className = "cat-mascot-welcome";
-    catalogMascot.setAttribute("aria-label", "Mascota de Compumatt: ¡Bienvenido!");
+    catalogMascot.setAttribute("aria-label", "Mascota de Compumatt: Centro de Servicio");
     catalogMascot.innerHTML = bubble + '<img src="' + mascotSrc + '" alt="">';
     var catHead = drawer.querySelector(".cat-head");
     drawer.insertBefore(catalogMascot, catHead || drawer.firstChild);
