@@ -375,7 +375,7 @@ function parsear(filasCrudas){
 
 function parsearServicios(filasCrudas){
   var filas=(filasCrudas||[]).filter(function(f){return f && f.some(function(v){return (v||"").trim()!=="";});});
-  if(filas.length<2) return [];
+  if(filas.length<1) return [];
   var enc=filas[0].map(function(h){return (h||"").trim().toLowerCase();});
   function col(){
     for(var i=0;i<arguments.length;i++){var n=enc.indexOf(arguments[i]);if(n>=0)return n;}
