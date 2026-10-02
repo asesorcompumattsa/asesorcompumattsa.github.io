@@ -509,6 +509,9 @@ body.tema-cancer_mama .seasonBadge{
   background:rgba(255,255,255,.22); color:#fff;
   box-shadow:0 0 14px rgba(255,174,211,.45);
 }
+body.tema-cancer_mama .event-bell span{
+  filter:hue-rotate(290deg) saturate(2.2) brightness(1.12) drop-shadow(0 0 7px #ff4f9a) !important;
+}
 
 .seasonParticles{
   position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden;
