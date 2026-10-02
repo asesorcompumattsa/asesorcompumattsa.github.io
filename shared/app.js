@@ -215,6 +215,7 @@ document.addEventListener("DOMContentLoaded", function(){
     catOverlay.classList.add("show");
     catSearch.value = "";
     activeTab = categoria || "todos";
+    actualizarCabeceraServicios();
     if(!cargado) cargar(); else { tabs(); grid(); }
     var sp = document.querySelector(".seasonParticles");
     if(sp) sp.style.display = "none";
@@ -419,12 +420,23 @@ function tabs(){
     b.onclick=function(){
       medir("filtrar_catalogo", {categoria: c});
       activeTab=c;
+      actualizarCabeceraServicios();
       document.querySelectorAll(".cat-tab").forEach(function(x){x.classList.remove("active");});
       b.classList.add("active");
       grid();
     };
     el.appendChild(b);
   });
+}
+
+function actualizarCabeceraServicios(){
+  var hero=document.getElementById("servicesHero");
+  var mascota=document.querySelector(".cat-mascot-welcome");
+  var drawer=document.querySelector(".cat-drawer");
+  var esServicios=activeTab==="servicios";
+  if(hero) hero.hidden=!esServicios;
+  if(mascota) mascota.style.display=esServicios?"none":"";
+  if(drawer) drawer.classList.toggle("services-mode",esServicios);
 }
 
 function grid(){
