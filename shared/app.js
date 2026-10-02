@@ -571,7 +571,7 @@ function initMascotaBienvenida() {
     var catalogMascot = document.createElement("div");
     catalogMascot.className = "cat-mascot-welcome";
     catalogMascot.setAttribute("aria-label", "Mascota de Compumatt: Centro de Servicio");
-    catalogMascot.innerHTML = bubble + '<img src="' + mascotSrc + '" alt="">';
+    catalogMascot.innerHTML = '<img src="' + mascotSrc + '" alt="">';
     var catHead = drawer.querySelector(".cat-head");
     drawer.insertBefore(catalogMascot, catHead || drawer.firstChild);
 
