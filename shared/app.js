@@ -49,7 +49,7 @@ var SHEET_URL = "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID
 var SERVICES_SHEET_NAME = "SERVICIOS_TECNICOS";
 var SERVICES_SHEET_URL = "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID
   + "/gviz/tq?tqx=out:json&sheet=" + encodeURIComponent(SERVICES_SHEET_NAME);
-var TALLER_WA = "50582493098";
+var TALLER_WA = (typeof NOMBRE !== "undefined" && (NOMBRE === "Ayling" || NOMBRE === "Luis")) ? "50576045180" : "50582493098";
 
 /* ──────────────────────────────────────────────────────────────────
    3) ESTADÍSTICAS INDEPENDIENTES — Google Analytics 4
@@ -224,6 +224,8 @@ document.addEventListener("DOMContentLoaded", function(){
     abrirCatalogoInicial("todos");
   };
   var tallerFab = document.getElementById("tallerFab");
+  var servicesWa = document.querySelector(".services-wa");
+  if(servicesWa) servicesWa.href = "https://wa.me/" + TALLER_WA + "?text=" + encodeURIComponent("Hola, quiero información sobre los Servicios Técnicos de Compumatt.");
   if(tallerFab) tallerFab.onclick = function(){
     medir("abrir_servicios_tecnicos", {origen: "burbuja_flotante"});
     abrirCatalogoInicial("servicios");
