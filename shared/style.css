@@ -500,6 +500,15 @@ body.tema-halloween .header{
 }
 body.tema-halloween .eyebrow{ color:#ffd580 !important; }
 body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
+body.tema-cancer_mama .header{
+  background: linear-gradient(135deg, #5b183f 0%, #c93679 58%, #f58bb4 100%) !important;
+}
+body.tema-cancer_mama .eyebrow{ color:#ffe5f0 !important; }
+body.tema-cancer_mama .card{ border-top:4px solid #e95b98; }
+body.tema-cancer_mama .seasonBadge{
+  background:rgba(255,255,255,.22); color:#fff;
+  box-shadow:0 0 14px rgba(255,174,211,.45);
+}
 
 .seasonParticles{
   position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden;
