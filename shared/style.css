@@ -614,6 +614,38 @@ body.tema-halloween .card{ border-top:4px solid #ff7a1a; }
   font-size: 12px;
   padding: 8px 11px;
 }
+.cat-mascot-welcome .service-countdown {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: calc(100% - 132px);
+  color: var(--navy, #0B1F3A);
+  text-align: left;
+}
+.service-countdown strong {
+  font: 900 15px/1.1 Inter, sans-serif;
+  letter-spacing: -.2px;
+}
+.service-countdown span {
+  font: 700 10px/1.1 Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .55px;
+  opacity: .78;
+}
+.service-countdown b {
+  display: inline-block;
+  margin-top: 3px;
+  padding: 6px 8px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 3px 8px rgba(11,31,58,.12);
+  font: 900 12px/1.1 Inter, sans-serif;
+  white-space: nowrap;
+}
 .cat-event-banner {
   margin: 2px 20px 8px;
   padding: 4px 2px;

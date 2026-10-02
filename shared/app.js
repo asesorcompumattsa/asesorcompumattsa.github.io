@@ -40,6 +40,7 @@ var API_KEY         = "AIzaSyArcHqRNfyFlOhetUofr8mNOwgGpZz2Kkc";
 var EVENTO_ACTIVO  = true;  // Cambia a false para ocultar el banner
 var EVENTO_TITULO  = "Feria Tecnológica";
 var EVENTO_FECHAS  = "25 al 30 de noviembre 2026";
+var EVENTO_INICIO  = "2026-11-25T00:00:00-06:00";
 var EVENTO_MENSAJE = "Somos más que tecnología";
 var EVENTO_DETALLE = "Ven a nuestra Feria Tecnológica y disfruta de nuestros descuentos, promociones y sorpresas especiales.";
 
@@ -571,7 +572,8 @@ function initMascotaBienvenida() {
     var catalogMascot = document.createElement("div");
     catalogMascot.className = "cat-mascot-welcome";
     catalogMascot.setAttribute("aria-label", "Mascota de Compumatt: Centro de Servicio");
-    catalogMascot.innerHTML = '<img src="' + mascotSrc + '" alt="">';
+    catalogMascot.innerHTML = '<div class="service-countdown" aria-live="polite"><strong>Feria Tecnológica</strong><span>Comienza en</span><b>Calculando...</b></div><img src="' + mascotSrc + '" alt="">';
+    iniciarCuentaRegresiva(catalogMascot.querySelector(".service-countdown b"));
     var catHead = drawer.querySelector(".cat-head");
     drawer.insertBefore(catalogMascot, catHead || drawer.firstChild);
 
@@ -595,6 +597,18 @@ function initMascotaBienvenida() {
       drawer.insertBefore(catEvent, catHead || drawer.firstChild);
     }
   }
+}
+
+function iniciarCuentaRegresiva(el){
+  if(!el) return;
+  function actualizar(){
+    var falta=new Date(EVENTO_INICIO).getTime()-Date.now();
+    if(falta<=0){el.textContent="¡Ya comenzó!";return;}
+    var d=Math.floor(falta/86400000), h=Math.floor(falta%86400000/3600000), m=Math.floor(falta%3600000/60000);
+    el.textContent=d+" días · "+String(h).padStart(2,"0")+" h · "+String(m).padStart(2,"0")+" min";
+  }
+  actualizar();
+  setInterval(actualizar,60000);
 }
 
 if (document.readyState === "loading") {
