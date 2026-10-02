@@ -605,6 +605,10 @@ function iniciarCuentaRegresiva(el){
   if(!el) return;
   function actualizar(){
     var falta=new Date(EVENTO_INICIO).getTime()-Date.now();
+    var diezDias=10*86400000;
+    var panel=el.closest(".service-countdown");
+    if(falta>diezDias){ if(panel) panel.style.display="none"; return; }
+    if(panel) panel.style.display="flex";
     if(falta<=0){el.textContent="¡Ya comenzó!";return;}
     var d=Math.floor(falta/86400000), h=Math.floor(falta%86400000/3600000), m=Math.floor(falta%3600000/60000);
     el.textContent=d+" días · "+String(h).padStart(2,"0")+" h · "+String(m).padStart(2,"0")+" min";
