@@ -25,7 +25,7 @@ var ESTILO = "brincar";
 var TEMAS = {
   halloween: { emojis:["🎃","🦇","👻"], badge:"🎃" },
   navidad:   { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
-  cancer_mama: { emojis:["🎗️"], badge:"🎗️ Octubre Rosa — Día del Cáncer de Mama" },
+  cancer_mama: { emojis:["🎗️"], badge:"Octubre Rosa — Día del Cáncer de Mama" },
   dia_muertos: { emojis:["💀","🌷","🕯️"], badge:"💀 Día de Muertos" }
 };
 
@@ -268,6 +268,7 @@ function initTema(){
   var cfg = TEMAS[TEMA];
   document.body.classList.add("tema-" + TEMA);
 
+  if(TEMA === "cancer_mama") return;
   var wrap = document.createElement("div");
   wrap.className = "seasonParticles estilo-" + (ESTILO==="brincar" ? "brincar" : "caer");
 
