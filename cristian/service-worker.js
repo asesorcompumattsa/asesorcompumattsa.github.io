@@ -1,5 +1,6 @@
-const CACHE_NAME = "c-compumatt-v6";
+const CACHE_NAME = "c-compumatt-v7";
 const APP_SHELL = [
+  "/cristian/splash.html",
   "/cristian/v2.html",
   "/shared/style.css?v=20261002-13",
   "/shared/app.js?v=20261002-11",

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#020817">
+<title>Catalogo Compumatt</title>
+<style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020817}
+body{display:grid;place-items:center;font-family:'Arial Rounded MT Bold','Trebuchet MS',sans-serif}
+.splash{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;min-height:100%;width:100%;padding:24px;text-align:center;animation:appear .45s ease-out both}
+.logo{width:min(52vw,220px);height:min(52vw,220px);object-fit:contain;border-radius:20px;filter:drop-shadow(0 0 18px #13c7ff66)}
+h1{margin:0;color:#eafaff;font-size:clamp(25px,7vw,42px);font-weight:900;letter-spacing:.055em;text-transform:none;text-shadow:0 0 5px #fff,0 0 12px #13c7ff,0 0 25px #13c7ff,0 0 42px #0a9fe9}
+.line{width:min(70vw,300px);height:2px;background:linear-gradient(90deg,transparent,#13c7ff,#f58bb4,#13c7ff,transparent);box-shadow:0 0 12px #13c7ff}
+@keyframes appear{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.splash{animation:none}}
+</style>
+</head>
+<body>
+<main class="splash" aria-label="Catalogo Compumatt">
+  <img class="logo" src="/cristian/icon-512.png" alt="Logo Compumatt">
+  <div class="line" aria-hidden="true"></div>
+  <h1>Catalogo Compumatt</h1>
+</main>
+<script>
+setTimeout(function(){location.replace('/cristian/v2.html?origen=pwa');},1800);
+</script>
+</body>
+</html>

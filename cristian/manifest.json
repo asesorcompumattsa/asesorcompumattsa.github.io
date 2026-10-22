@@ -3,7 +3,7 @@
   "short_name": "Catalogo Compumatt",
   "description": "Catálogo digital de Compumatt de Cristian García",
   "lang": "es-NI",
-  "start_url": "/cristian/v2.html?origen=pwa",
+  "start_url": "/cristian/splash.html?origen=pwa",
   "scope": "/cristian/",
   "display": "standalone",
   "orientation": "portrait",
