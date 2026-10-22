@@ -15,6 +15,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/shared/style.css?v=20261002-12">
+<link rel="manifest" href="/cristian/manifest.json">
+<link rel="apple-touch-icon" href="/cristian/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="C Compumatt">
 <style>
   :root{--v2-bg:#020817;--v2-panel:#071b3b;--v2-cyan:#13c7ff;--v2-blue:#1677e8;--v2-red:#f21f3f;--v2-text:#f5fbff;--v2-muted:#a6c5e4}
   html,body{min-height:100%;background:var(--v2-bg)}
@@ -51,6 +56,9 @@
   .taller-fab{position:relative;margin:12px 0 0 0;z-index:9;display:block;width:84px;height:84px;padding:0;border:2px solid #13c7ff;border-radius:50%;background:#fff url("/shared/logo-servicios-tecnicos.png") center/cover no-repeat;box-shadow:0 5px 16px #0009,0 0 18px #13c7ff99;cursor:pointer;animation:tallerPulse 2.6s ease-in-out infinite}.taller-fab span{display:none}.taller-fab::after{content:"Centro de Servicio";position:absolute;left:96px;top:25px;padding:8px 11px;border:1px solid #13c7ff;border-radius:12px;background:#eefaff;color:#06122e;font:900 12px Inter,sans-serif;white-space:nowrap;box-shadow:0 0 14px #13c7ff99}.taller-fab::before{content:"";position:absolute;left:85px;top:42px;width:14px;height:14px;background:#eefaff;border-left:1px solid #13c7ff;border-bottom:1px solid #13c7ff;transform:rotate(45deg);z-index:-1}.taller-fab:focus-visible{outline:2px solid #fff;outline-offset:3px}@keyframes tallerPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
   @media(max-width:430px){.header{padding-right:126px;margin-left:12px;margin-right:12px}.body{padding-left:12px;padding-right:12px}.event-banner{margin-left:12px;margin-right:12px}.logoBand{height:132px}.card-mascot-welcome{transform:scale(.9);right:-3px}}
   @media(prefers-reduced-motion:reduce){.card-mascot-welcome img,.offers-banner,.offers-fire{animation:none}}
+
+  .btn-install{background:linear-gradient(120deg,#b92e69,#f58bb4);color:#fff;border-color:#ffb8d5;box-shadow:0 8px 20px #d94b8c55}
+  .btn-install:disabled{opacity:.8}
 </style>
 </head>
 <body>
@@ -71,6 +79,7 @@
   <div class="body">
     <div class="actions">
       <button type="button" class="btn btn-red" id="openCatalog">📦 Ver catálogo completo</button>
+      <button type="button" class="btn btn-install" id="installAppBtn">📲 Instalar C Compumatt</button>
       <div id="offersBanner" class="offers-banner" hidden role="button" tabindex="0" aria-label="Ver productos en oferta"><div class="offers-fire">🔥</div><div class="offers-copy"><strong>¡OFERTAS ESPECIALES!</strong><span>Descuentos por tiempo limitado</span></div><div class="offers-arrow">Ver ofertas&nbsp; →</div></div>
       <button type="button" class="btn btn-whatsapp-save" id="sendCatalogBtn">📲 Enviarme el catálogo por WhatsApp</button>
     </div>
@@ -85,5 +94,6 @@
 var NOMBRE="Cristian";var NOMBRE_COMPLETO="Cristian García";var ROL="Asesor de ventas";var TEL="+505 8495 3863";var WA="50584953863";
 </script>
 <script src="/shared/app.js?v=20261002-10"></script>
+<script src="/cristian/pwa-install.js"></script>
 </body>
 </html>
