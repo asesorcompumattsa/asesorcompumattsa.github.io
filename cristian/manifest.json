@@ -1,7 +1,7 @@
 {
-  "name": "C Compumatt",
-  "short_name": "C Compumatt",
-  "description": "Catálogo digital de Cristian García en Compumatt",
+  "name": "Compumatt Catálogo",
+  "short_name": "Compumatt Catálogo",
+  "description": "Catálogo digital de Compumatt de Cristian García",
   "lang": "es-NI",
   "start_url": "/cristian/v2.html?origen=pwa",
   "scope": "/cristian/",
@@ -9,9 +9,22 @@
   "orientation": "portrait",
   "theme_color": "#06122e",
   "background_color": "#020817",
-  "categories": ["business", "shopping"],
+  "categories": [
+    "business",
+    "shopping"
+  ],
   "icons": [
-    {"src": "/cristian/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
-    {"src": "/cristian/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+    {
+      "src": "/cristian/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/cristian/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }

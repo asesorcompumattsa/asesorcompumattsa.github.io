@@ -1,4 +1,4 @@
-const CACHE_NAME = "c-compumatt-v2";
+const CACHE_NAME = "c-compumatt-v3";
 const APP_SHELL = [
   "/cristian/v2.html",
   "/shared/style.css?v=20261002-13",
