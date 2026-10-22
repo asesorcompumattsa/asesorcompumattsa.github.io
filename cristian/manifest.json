@@ -1,6 +1,6 @@
 {
-  "name": "Compumatt Catálogo",
-  "short_name": "Compumatt Catálogo",
+  "name": "Catalogo Compumatt",
+  "short_name": "Catalogo Compumatt",
   "description": "Catálogo digital de Compumatt de Cristian García",
   "lang": "es-NI",
   "start_url": "/cristian/v2.html?origen=pwa",
