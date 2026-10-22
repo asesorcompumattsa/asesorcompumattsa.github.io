@@ -840,3 +840,7 @@ body.tema-cancer_mama .event-bell span{
   .cat-drawer { height: 94vh; }
   .event-popover { padding: 16px; }
 }
+
+/* Catálogo a pantalla completa en todas las tarjetas */
+.cat-overlay{align-items:stretch;}
+.cat-drawer{width:100vw;max-width:none;height:100vh;min-height:100vh;border-radius:0;}

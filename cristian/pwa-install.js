@@ -8,7 +8,7 @@
   window.addEventListener("beforeinstallprompt",function(event){
     event.preventDefault();
     deferredPrompt=event;
-    button.textContent="📲 Instalar C Compumatt";
+    button.textContent="📲 Instalar Catálogo digital";
   });
   button.addEventListener("click",async function(){
     if(deferredPrompt){

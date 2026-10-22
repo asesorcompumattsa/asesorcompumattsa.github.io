@@ -1,8 +1,8 @@
-const CACHE_NAME = "c-compumatt-v1";
+const CACHE_NAME = "c-compumatt-v2";
 const APP_SHELL = [
   "/cristian/v2.html",
-  "/shared/style.css?v=20261002-12",
-  "/shared/app.js?v=20261002-10",
+  "/shared/style.css?v=20261002-13",
+  "/shared/app.js?v=20261002-11",
   "/shared/logo-compumatt-transparent.png",
   "/shared/mascota_final.png",
   "/cristian/icon-192.png",
