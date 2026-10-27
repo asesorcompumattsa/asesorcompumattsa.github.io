@@ -844,3 +844,37 @@ body.tema-cancer_mama .event-bell span{
 /* Catálogo a pantalla completa en todas las tarjetas */
 .cat-overlay{align-items:stretch;}
 .cat-drawer{width:100vw;max-width:none;height:100vh;min-height:100vh;border-radius:0;}
+
+/* ═════════════════════════════════════════════════════════════
+   COMPUMATT BLUE GLASS — Feria Tecnológica de noviembre
+   Tema claro global: conserva mascota, logo, fotos y catálogo.
+═════════════════════════════════════════════════════════════ */
+body.tema-blue_glass{
+  background:
+    radial-gradient(circle at 8% 8%,rgba(19,199,255,.22),transparent 26%),
+    radial-gradient(circle at 92% 86%,rgba(20,119,214,.16),transparent 30%),
+    linear-gradient(135deg,#fff 0%,#f3fbff 52%,#eaf7fc 100%);
+  color:var(--navy);
+}
+body.tema-blue_glass::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.42;
+  background:linear-gradient(125deg,transparent 0 38%,rgba(19,199,255,.10) 38.2% 38.5%,transparent 38.7% 100%),linear-gradient(35deg,transparent 0 68%,rgba(20,119,214,.07) 68.2% 68.5%,transparent 68.7% 100%);
+}
+body.tema-blue_glass .card{background:rgba(255,255,255,.92);border:1px solid rgba(20,119,214,.18);box-shadow:0 20px 45px rgba(6,43,88,.18)}
+body.tema-blue_glass .logoBand{background:rgba(255,255,255,.82);border-bottom:1px solid rgba(20,119,214,.18)}
+body.tema-blue_glass .logoBand::before{background:linear-gradient(rgba(255,255,255,.74),rgba(255,255,255,.74)),url('/shared/local-compumatt.png') center 46%/cover no-repeat}
+body.tema-blue_glass .header{background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(226,247,255,.9));border:1px solid rgba(20,119,214,.32);box-shadow:0 15px 34px rgba(6,43,88,.14),inset 0 0 24px rgba(19,199,255,.12)}
+body.tema-blue_glass .header::after{background:linear-gradient(90deg,transparent,#13c7ff,#1477d6,transparent)}
+body.tema-blue_glass .header::before{border-color:rgba(20,119,214,.14);border-left-color:transparent}
+body.tema-blue_glass .eyebrow{color:#0878b8!important}.tema-blue_glass .name{color:#062b58;text-shadow:0 0 12px rgba(19,199,255,.3)}.tema-blue_glass .role,.tema-blue_glass .brandline span{color:#37627c}.tema-blue_glass .brandline .mark{border-color:#1477d6;border-right-color:#13c7ff;border-top-color:#1477d6}
+body.tema-blue_glass .body{background:transparent}.tema-blue_glass .phone{background:rgba(255,255,255,.7);border:1px solid rgba(20,119,214,.18);color:#5b6b82;box-shadow:0 3px 12px rgba(6,43,88,.06)}.tema-blue_glass .phone strong{color:#062b58}
+body.tema-blue_glass .btn-primary{background:linear-gradient(120deg,#062b58,#1477d6)}.tema-blue_glass .btn-special{background:#fff;color:#062b58;border-color:#a7dced}.tema-blue_glass .btn-cyan{background:linear-gradient(120deg,#1477d6,#13c7ff)}
+body.tema-blue_glass .offers-banner{background:linear-gradient(110deg,#062b58,#1477d6 58%,#13c7ff);border-color:#8ceaff;box-shadow:0 8px 22px rgba(20,119,214,.28)}
+body.tema-blue_glass .foot{color:#5b6b82}.tema-blue_glass .card-mascot-welcome .mascot-bubble{border-color:#1477d6;background:#fff;color:#062b58;box-shadow:0 0 14px rgba(19,199,255,.38)!important}
+body.tema-blue_glass .event-banner{background:linear-gradient(110deg,rgba(255,255,255,.96),rgba(227,248,255,.94));border:1px solid #58cceb;border-bottom:3px solid #1477d6;color:#062b58;box-shadow:0 8px 22px rgba(20,119,214,.18),inset 0 0 20px rgba(19,199,255,.12)}
+body.tema-blue_glass .event-banner::after{border-top-color:rgba(19,199,255,.7)}.tema-blue_glass .event-bell{color:#1477d6;filter:drop-shadow(0 2px 4px rgba(20,119,214,.25))}.tema-blue_glass .event-bell i{background:#1477d6;border-color:#fff}.tema-blue_glass .event-copy strong{color:#062b58}.tema-blue_glass .event-copy span{color:#0878b8}.tema-blue_glass .event-copy small{color:#5b6b82}.tema-blue_glass .event-spark{color:#13aee8}
+.event-countdown{display:inline-block;margin-top:4px;padding:3px 7px;border-radius:7px;background:#e0f7ff;color:#075a86!important;font-size:10px;font-weight:900;letter-spacing:.02em;white-space:nowrap}
+body.tema-blue_glass .cat-overlay{background:rgba(6,43,88,.28)}body.tema-blue_glass .cat-drawer{background:rgba(247,252,255,.98);border:1px solid #9adff4}.tema-blue_glass .cat-head h2{color:#062b58}.tema-blue_glass .cat-back{color:#1477d6}.tema-blue_glass .cat-search-w input{background:#fff;border:1px solid #c4e8f5}.tema-blue_glass .cat-tab{background:#fff;color:#5b6b82}.tema-blue_glass .cat-tab.active{background:#1477d6;color:#fff}.tema-blue_glass .cat-grid{background:linear-gradient(135deg,#f6fcff,#eaf7fc)}.tema-blue_glass .prod-card{background:#fff;border:1px solid #bde6f2;box-shadow:0 4px 13px rgba(6,43,88,.10)}.tema-blue_glass .prod-name{color:#062b58}.tema-blue_glass .prod-price{color:#1477d6}.tema-blue_glass .det-box{background:#fff;border:1px solid #9adff4}.tema-blue_glass .det-body h3{color:#062b58}.tema-blue_glass .det-body p{color:#5b6b82}.tema-blue_glass .det-price{color:#1477d6}.tema-blue_glass .det-back{background:#eefaff;color:#075a86}.tema-blue_glass .cat-mascot-welcome{background:linear-gradient(110deg,rgba(255,255,255,.72),rgba(190,239,251,.72));border:1px solid #9adff4}
+.tema-blue_glass .services-hero{background-image:linear-gradient(100deg,rgba(6,43,88,.55),rgba(10,114,157,.32)),url('/shared/taller-real-1.png'),url('/shared/taller-real-2.png');border-color:#58cceb}
+.tema-blue_glass .event-popover-card{border-color:#9adff4}.tema-blue_glass .event-popover-copy strong{color:#062b58}.tema-blue_glass .event-popover-copy span{color:#1477d6}
+body.tema-blue_glass .seasonParticles{display:none}

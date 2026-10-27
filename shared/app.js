@@ -15,7 +15,7 @@
    Para sumar una fecha nueva (ej. día del cáncer de mama), agregá
    una entrada más al objeto TEMAS de abajo con sus propios emojis.
 ──────────────────────────────────────────────────────────────────── */
-var TEMA = "cancer_mama";
+var TEMA = "blue_glass";
 
 /* ESTILO DE MOVIMIENTO — elegí cómo se comportan las decoraciones:
    "caer"    → caen desde arriba cruzando toda la pantalla (como la lluvia)
@@ -26,6 +26,7 @@ var TEMAS = {
   halloween: { emojis:["🎃","🦇","👻"], badge:"🎃" },
   navidad:   { emojis:["❄️","🎄","⭐"],  badge:"🎄 Feliz Navidad" },
   cancer_mama: { emojis:["🎗️"], badge:"Octubre Rosa — Día del Cáncer de Mama" },
+  blue_glass: { emojis:["✦"], badge:"Feria Tecnológica Compumatt" },
   dia_muertos: { emojis:["💀","🌷","🕯️"], badge:"💀 Día de Muertos" }
 };
 
@@ -38,11 +39,11 @@ var API_KEY         = "AIzaSyArcHqRNfyFlOhetUofr8mNOwgGpZz2Kkc";
 
 /* Evento general de Compumatt: se cambia una sola vez para todos los vendedores. */
 var EVENTO_ACTIVO  = true;  // Cambia a false para ocultar el banner
-var EVENTO_TITULO  = "Octubre Rosa";
-var EVENTO_FECHAS  = "Mes de la prevención del cáncer de mama";
-var EVENTO_INICIO  = "2026-11-25T00:00:00-06:00";
-var EVENTO_MENSAJE = "La detección temprana puede salvar vidas";
-var EVENTO_DETALLE = "En este Octubre Rosa, recordemos la importancia de la prevención, el autoexamen y los chequeos médicos. Cuidarte también es una forma de quererte.";
+var EVENTO_TITULO  = "Feria Tecnológica Compumatt";
+var EVENTO_FECHAS  = "Del 23 al 28 de noviembre de 2026";
+var EVENTO_INICIO  = "2026-11-23T00:00:00-06:00";
+var EVENTO_MENSAJE = "Promociones, tecnología y soluciones para ti";
+var EVENTO_DETALLE = "Prepárate para nuestra Feria Tecnológica Compumatt: promociones especiales, equipos y soluciones para ti del 23 al 28 de noviembre.";
 
 var SHEET_URL = "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID
   + "/gviz/tq?tqx=out:json&sheet=" + encodeURIComponent(SHEET_NAME);
@@ -268,7 +269,7 @@ function initTema(){
   var cfg = TEMAS[TEMA];
   document.body.classList.add("tema-" + TEMA);
 
-  if(TEMA === "cancer_mama") return;
+  if(TEMA === "cancer_mama" || TEMA === "blue_glass") return;
   var wrap = document.createElement("div");
   wrap.className = "seasonParticles estilo-" + (ESTILO==="brincar" ? "brincar" : "caer");
 
@@ -501,9 +502,11 @@ function initEvento(){
   var title=document.getElementById("eventTitle");
   var dates=document.getElementById("eventDates");
   var subtitle=document.getElementById("eventSubtitle");
+  var countdown=document.getElementById("eventCountdown");
   if(title) title.textContent=EVENTO_TITULO || "Evento Compumatt";
   if(dates) dates.textContent=EVENTO_FECHAS || "Próximamente";
   if(subtitle) subtitle.textContent=EVENTO_MENSAJE || "";
+  if(countdown) iniciarCuentaRegresiva(countdown);
   banner.hidden=false;
   banner.classList.add("event-clickable");
   banner.setAttribute("role", "button");
@@ -590,12 +593,14 @@ function initMascotaBienvenida() {
     catEvent.setAttribute("role", "button");
     catEvent.setAttribute("tabindex", "0");
     catEvent.setAttribute("aria-label", "Abrir información de " + (EVENTO_TITULO || "evento"));
-    catEvent.innerHTML = '<div class="event-bell" aria-hidden="true"><span>🎗️</span><i></i></div>'
-      +'<div class="event-copy"><strong></strong><span></span><small></small></div>'
+    catEvent.innerHTML = '<div class="event-bell" aria-hidden="true"><span>✦</span><i></i></div>'
+      +'<div class="event-copy"><strong></strong><span></span><small></small><b class="event-countdown" hidden></b></div>'
       +'<div class="event-spark" aria-hidden="true">✦</div>';
     catEvent.querySelector("strong").textContent = EVENTO_TITULO || "Evento Compumatt";
     catEvent.querySelector(".event-copy span").textContent = EVENTO_FECHAS || "Próximamente";
     catEvent.querySelector("small").textContent = EVENTO_MENSAJE || "";
+    var catCountdown = catEvent.querySelector(".event-countdown");
+    if(catCountdown) iniciarCuentaRegresiva(catCountdown);
     catEvent.onclick = mostrarInfoEvento;
     catEvent.onkeydown = function(e){
       if(e.key === "Enter" || e.key === " "){ e.preventDefault(); mostrarInfoEvento(); }
@@ -609,9 +614,10 @@ function iniciarCuentaRegresiva(el){
   function actualizar(){
     var falta=new Date(EVENTO_INICIO).getTime()-Date.now();
     var diezDias=10*86400000;
-    var panel=el.closest(".service-countdown");
-    if(falta>diezDias){ if(panel) panel.style.display="none"; return; }
-    if(panel) panel.style.display="flex";
+    var panel=el.closest(".service-countdown") || el.closest(".event-banner");
+    if(falta>diezDias){ el.hidden=true; return; }
+    el.hidden=false;
+    if(panel && panel.classList.contains("service-countdown")) panel.style.display="flex";
     if(falta<=0){el.textContent="¡Ya comenzó!";return;}
     var d=Math.floor(falta/86400000), h=Math.floor(falta%86400000/3600000), m=Math.floor(falta%3600000/60000);
     el.textContent=d+" días · "+String(h).padStart(2,"0")+" h · "+String(m).padStart(2,"0")+" min";
