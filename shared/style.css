@@ -878,3 +878,5 @@ body.tema-blue_glass .cat-overlay{background:rgba(6,43,88,.28)}body.tema-blue_gl
 .tema-blue_glass .services-hero{background-image:linear-gradient(100deg,rgba(6,43,88,.55),rgba(10,114,157,.32)),url('/shared/taller-real-1.png'),url('/shared/taller-real-2.png');border-color:#58cceb}
 .tema-blue_glass .event-popover-card{border-color:#9adff4}.tema-blue_glass .event-popover-copy strong{color:#062b58}.tema-blue_glass .event-popover-copy span{color:#1477d6}
 body.tema-blue_glass .seasonParticles{display:none}
+body.tema-blue_glass .btn-red{background:linear-gradient(120deg,#062b58,#1477d6);box-shadow:0 8px 18px rgba(20,119,214,.22)}
+body.tema-blue_glass .btn-install{background:linear-gradient(120deg,#1477d6,#13c7ff);border-color:#8ceaff;box-shadow:0 8px 20px rgba(20,119,214,.24)}
