@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06122e"><meta name="description" content="Catálogo digital Compumatt: elige la versión móvil o web.">
+<title>Compumatt | Catálogo Digital</title>
+<style>
+:root{--navy:#06122e;--cyan:#13c7ff;--pink:#f58bb4;--red:#e53935;--ink:#eafaff}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -10%,#114d78 0,#06122e 45%,#020817 100%);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+body{display:flex;justify-content:center;padding:28px 16px 42px}.page{width:min(100%,980px)}
+.logo-wrap{text-align:center;padding:14px 0 8px}.logo{width:min(78vw,360px);height:auto;filter:drop-shadow(0 0 20px #13c7ff55)}
+.hero{text-align:center;padding:12px 0 24px}.eyebrow{margin:0 0 8px;color:#9eeaff;font-size:12px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}.hero h1{margin:0;font-size:clamp(28px,6vw,56px);line-height:1.04;text-shadow:0 0 16px #13c7ff55}.hero p{margin:12px auto 0;max-width:620px;color:#c9e8f5;line-height:1.5}
+.event{display:flex;align-items:center;gap:14px;margin:0 auto 22px;padding:14px 18px;border:1px solid #f58bb488;border-radius:18px;background:linear-gradient(100deg,#531d4eaa,#0b4e73aa);box-shadow:0 0 24px #f58bb433}.event-icon{font-size:32px}.event strong{display:block;color:#fff;font-size:18px}.event span{display:block;margin-top:3px;color:#ffd9e8;font-size:13px}
+.choose{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:0 auto 24px}.choice{display:flex;flex-direction:column;align-items:flex-start;min-height:210px;padding:24px;border-radius:22px;border:1px solid #ffffff25;background:#071b3bea;box-shadow:0 12px 30px #0005;transition:.18s transform,.18s border-color}.choice:hover{transform:translateY(-3px);border-color:#13c7ff99}.choice .icon{font-size:36px}.choice h2{margin:12px 0 6px;font-size:24px}.choice p{margin:0;color:#b9d7e6;line-height:1.45;font-size:14px}.choice a{margin-top:auto;width:100%;padding:12px 16px;border-radius:12px;text-align:center;text-decoration:none;font-weight:900;color:#06122e;background:linear-gradient(100deg,#13c7ff,#8ceaff)}.choice.web a{background:linear-gradient(100deg,#f58bb4,#ffd2e4)}
+.note{text-align:center;color:#a7c7d8;font-size:12px}.prefs{margin-top:14px;text-align:center}.prefs button{border:0;background:none;color:#8ceaff;text-decoration:underline;cursor:pointer;font-size:12px}
+@media(max-width:640px){.choose{grid-template-columns:1fr}.choice{min-height:185px}.event{align-items:flex-start}.logo{width:min(88vw,330px)}}
+</style></head>
+<body><main class="page">
+<section class="logo-wrap"><img class="logo" src="/shared/logo-compumatt-transparent.png" alt="Compumatt"></section>
+<section class="hero"><p class="eyebrow">Catálogo digital</p><h1>¿Cómo deseas ver Compumatt?</h1><p>Elige la experiencia que mejor se adapta a tu dispositivo. Puedes cambiar de versión cuando quieras.</p></section>
+<section class="event"><div class="event-icon">🎪</div><div><strong>Feria Tecnológica</strong><span>Del 23 al 28 de noviembre de 2026 · promociones y descuentos especiales</span></div></section>
+<section class="choose"><article class="choice"><div class="icon">📱</div><h2>Versión móvil</h2><p>Diseñada para teléfonos, con botones grandes, WhatsApp directo y opción de instalar el catálogo.</p><a href="/cristian/v2.html?origen=selector" data-choice="mobile">Entrar a versión móvil</a></article><article class="choice web"><div class="icon">🖥️</div><h2>Versión web</h2><p>Una vista amplia para computadora o tablet, con acceso a todos los asesores y servicios.</p><a href="/web.html" data-choice="web">Entrar a versión web</a></article></section>
+<p class="note">Compumatt de Nicaragua S.A. · Tecnología, equipos y soluciones</p><div class="prefs"><button id="resetChoice" type="button">Borrar mi preferencia</button></div>
+</main><script>
+(function(){var mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);var saved=localStorage.getItem('compumatt-view');if(saved==='mobile'||saved==='web'){document.querySelector('[data-choice="'+saved+'"]')?.focus();}document.querySelectorAll('[data-choice]').forEach(function(a){a.addEventListener('click',function(){localStorage.setItem('compumatt-view',a.dataset.choice);});});document.getElementById('resetChoice').onclick=function(){localStorage.removeItem('compumatt-view');alert('Preferencia borrada. Ahora podrás elegir nuevamente.');};})();
+</script></body></html>
