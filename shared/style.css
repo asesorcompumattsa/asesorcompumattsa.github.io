@@ -936,3 +936,52 @@ body.tema-blue_glass .services-event-marquee{background:linear-gradient(90deg,#0
   .prod-price.price-burst strong{font-size:13px}
   .services-event-marquee{font-size:9px;letter-spacing:.08em}
 }
+
+/* Marquesina global de Feria Tecnológica: portada, catálogo y taller */
+body.tema-blue_glass .event-banner{
+  min-height:82px;
+  padding:16px 18px;
+  border-radius:0 0 18px 18px;
+  border-top:1px solid #9feeff;
+  background:linear-gradient(90deg,#062b58 0%,#0878b8 45%,#13c7ff 52%,#0878b8 70%,#062b58 100%);
+  background-size:220% 100%;
+  animation:eventMarqueeGlow 7s linear infinite;
+  box-shadow:0 0 22px rgba(19,199,255,.42),inset 0 0 18px rgba(255,255,255,.13);
+}
+body.tema-blue_glass .event-banner::before{
+  content:"";position:absolute;inset:7px;border:1px solid rgba(159,238,255,.55);border-radius:12px;pointer-events:none;
+  box-shadow:0 0 10px rgba(19,199,255,.4),inset 0 0 10px rgba(255,255,255,.08);
+}
+body.tema-blue_glass .event-banner .event-bell{width:48px;height:48px;font-size:37px;color:#fff}
+body.tema-blue_glass .event-banner .event-copy strong{font-size:16px;line-height:1.05;color:#fff;text-shadow:0 0 8px #13c7ff}
+body.tema-blue_glass .event-banner .event-copy span{font-size:13px;color:#fff;text-shadow:0 0 6px #13c7ff}
+body.tema-blue_glass .event-banner .event-copy small{font-size:11px;color:#e9fbff}
+body.tema-blue_glass .event-banner .event-spark{font-size:28px;color:#fff;text-shadow:0 0 9px #13c7ff}
+body.tema-blue_glass .event-banner .event-countdown{font-size:clamp(15px,4vw,20px);padding:7px 11px;background:linear-gradient(110deg,#fff,#bff5ff);color:#062b58!important;box-shadow:0 0 14px rgba(255,255,255,.42)}
+@keyframes eventMarqueeGlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* Al abrir cualquier categoría, la marquesina queda arriba y bien visible. */
+body.tema-blue_glass .cat-event-banner{
+  min-height:70px;
+  margin:8px 14px 10px;
+  padding:10px 8px;
+  border:1px solid #58cceb;
+  border-radius:14px;
+  background:linear-gradient(90deg,#062b58,#0878b8 50%,#062b58);
+  color:#fff;
+  box-shadow:0 0 18px rgba(19,199,255,.34),inset 0 0 14px rgba(255,255,255,.1);
+  animation:eventMarqueeGlow 7s linear infinite;
+}
+body.tema-blue_glass .cat-event-banner::before{content:"";position:absolute;inset:5px;border:1px solid rgba(159,238,255,.45);border-radius:10px;pointer-events:none}
+body.tema-blue_glass .cat-event-banner .event-bell{width:38px;height:38px;font-size:31px;color:#fff}
+body.tema-blue_glass .cat-event-banner .event-copy strong{font-size:13px;color:#fff}
+body.tema-blue_glass .cat-event-banner .event-copy span{font-size:11px;color:#fff}
+body.tema-blue_glass .cat-event-banner .event-copy small{font-size:10px;color:#e9fbff}
+body.tema-blue_glass .cat-event-banner .event-countdown{font-size:12px;padding:4px 8px;background:#fff;color:#062b58!important}
+body.tema-blue_glass .cat-event-banner .event-spark{color:#fff}
+
+/* El rótulo de oferta también usa amarillo, incluido el texto pequeño. */
+.prod-price.price-burst small,
+.prod-price.price-burst strong,
+.det-price.price-burst small,
+.det-price.price-burst strong{color:#ffef3b!important}
