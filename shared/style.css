@@ -985,3 +985,8 @@ body.tema-blue_glass .cat-event-banner .event-spark{color:#fff}
 .prod-price.price-burst strong,
 .det-price.price-burst small,
 .det-price.price-burst strong{color:#ffef3b!important}
+
+/* Ajuste final: deja respirar el nombre/descripcion del producto sin mover la tarjeta. */
+.prod-card .prod-price.price-burst{
+  transform:translateY(6px) rotate(-4deg);
+}
