@@ -880,3 +880,59 @@ body.tema-blue_glass .cat-overlay{background:rgba(6,43,88,.28)}body.tema-blue_gl
 body.tema-blue_glass .seasonParticles{display:none}
 body.tema-blue_glass .btn-red{background:linear-gradient(120deg,#062b58,#1477d6);box-shadow:0 8px 18px rgba(20,119,214,.22)}
 body.tema-blue_glass .btn-install{background:linear-gradient(120deg,#1477d6,#13c7ff);border-color:#8ceaff;box-shadow:0 8px 20px rgba(20,119,214,.24)}
+
+/* Ajustes de noviembre: ofertas más visibles y rótulo de feria en el taller */
+.prod-price.price-burst,
+.det-price.price-burst{
+  width:92px;
+  min-height:60px;
+  padding:9px 6px 8px;
+}
+.prod-price.price-burst small,
+.det-price.price-burst small{
+  font-size:10px;
+  letter-spacing:.06em;
+}
+.prod-price.price-burst strong,
+.det-price.price-burst strong{
+  font-size:15px;
+  line-height:1.05;
+  color:#ffef3b;
+  text-shadow:0 1px 1px rgba(90,0,0,.35);
+}
+.services-event-marquee{
+  position:relative;
+  width:calc(100% + 32px);
+  margin:-22px -16px 14px;
+  padding:8px 12px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-align:center;
+  color:#e9fbff;
+  background:linear-gradient(90deg,rgba(4,35,75,.88),rgba(9,137,190,.82),rgba(4,35,75,.88));
+  border-bottom:1px solid rgba(123,235,255,.88);
+  box-shadow:0 0 16px rgba(19,199,255,.55),inset 0 0 12px rgba(255,255,255,.12);
+  font:900 11px/1.1 'Space Grotesk',sans-serif;
+  letter-spacing:.12em;
+  text-shadow:0 0 7px #13c7ff,0 0 14px rgba(19,199,255,.75);
+}
+.services-event-marquee span{display:inline-block;animation:servicesMarquee 12s linear infinite}
+@keyframes servicesMarquee{0%{transform:translateX(48%)}100%{transform:translateX(-48%)}}
+.event-countdown{
+  align-self:flex-start;
+  margin-top:6px;
+  padding:6px 10px;
+  border-radius:9px;
+  background:linear-gradient(110deg,#062b58,#1477d6);
+  color:#fff!important;
+  font:900 clamp(13px,3.4vw,18px)/1.05 'Space Grotesk',sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 0 12px rgba(20,119,214,.35),inset 0 0 8px rgba(255,255,255,.16);
+}
+.cat-event-banner .event-countdown{font-size:11px;padding:4px 7px;margin-top:3px}
+body.tema-blue_glass .services-event-marquee{background:linear-gradient(90deg,#062b58,#0878b8 50%,#062b58);color:#fff}
+@media(max-width:380px){
+  .prod-price.price-burst{width:84px;min-height:56px}
+  .prod-price.price-burst strong{font-size:13px}
+  .services-event-marquee{font-size:9px;letter-spacing:.08em}
+}

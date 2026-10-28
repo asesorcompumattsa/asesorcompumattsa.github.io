@@ -613,9 +613,7 @@ function iniciarCuentaRegresiva(el){
   if(!el) return;
   function actualizar(){
     var falta=new Date(EVENTO_INICIO).getTime()-Date.now();
-    var diezDias=10*86400000;
     var panel=el.closest(".service-countdown") || el.closest(".event-banner");
-    if(falta>diezDias){ el.hidden=true; return; }
     el.hidden=false;
     if(panel && panel.classList.contains("service-countdown")) panel.style.display="flex";
     if(falta<=0){el.textContent="¡Ya comenzó!";return;}
