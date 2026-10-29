@@ -475,6 +475,7 @@ function grid(){
       '<div class="prod-img-w">'+imgH+bdgH+'</div>'
       +'<div class="prod-body">'
         +'<p class="prod-name">'+p.nom+'</p>'
+        +(p.desc?'<p class="prod-desc">'+p.desc+'</p>':'')
         +'<div class="prod-footer">'+precioHtml(p,'prod-price')+actH+'</div>'
       +'</div>';
     d.onclick=function(){

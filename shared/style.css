@@ -990,3 +990,28 @@ body.tema-blue_glass .cat-event-banner .event-spark{color:#fff}
 .prod-card .prod-price.price-burst{
   transform:translateY(6px) rotate(-4deg);
 }
+
+/* Descripción/modelo visible en la vista general del catálogo. */
+.prod-card{height:268px}
+.prod-card .prod-img-w{height:130px}
+.prod-card .prod-body{height:138px;padding:8px 9px 10px;justify-content:flex-start;gap:4px}
+.prod-card .prod-name{max-height:30px;line-height:1.22}
+.prod-card .prod-desc{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+  margin:0;
+  color:#5b6b82;
+  font-size:10px;
+  line-height:1.25;
+  min-height:0;
+}
+.prod-card .prod-footer{margin-top:auto;min-height:62px;align-items:flex-end}
+.prod-card .prod-price.price-burst{transform:translateY(0) rotate(-4deg)}
+@media(max-width:380px){
+  .prod-card{height:258px}
+  .prod-card .prod-img-w{height:124px}
+  .prod-card .prod-body{height:134px}
+  .prod-card .prod-desc{-webkit-line-clamp:2}
+}
