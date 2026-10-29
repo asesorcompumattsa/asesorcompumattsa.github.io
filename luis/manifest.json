@@ -1,0 +1,30 @@
+{
+  "name": "Catálogo Compumatt",
+  "short_name": "Catálogo Compumatt",
+  "description": "Catálogo digital de Compumatt · Luis",
+  "lang": "es-NI",
+  "start_url": "/luis/v2.html?origen=pwa",
+  "scope": "/luis/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#06122e",
+  "background_color": "#020817",
+  "categories": [
+    "business",
+    "shopping"
+  ],
+  "icons": [
+    {
+      "src": "/luis/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/luis/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

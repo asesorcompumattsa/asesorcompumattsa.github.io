@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function(){
   medir("visita_tarjeta_vendedor", {pagina: window.location.pathname});
 
   /* --- Rellenar los datos del vendedor en el HTML --- */
-  document.title = (typeof NOMBRE_COMPLETO !== "undefined" ? NOMBRE_COMPLETO : "Compumatt") + " · Compumatt";
+  document.title = "Catálogo Compumatt" + (typeof NOMBRE_COMPLETO !== "undefined" ? " · " + NOMBRE_COMPLETO : "");
   var elName = document.getElementById("vendorName");
   if(elName) elName.textContent = NOMBRE_COMPLETO;
   var elRole = document.getElementById("vendorRole");

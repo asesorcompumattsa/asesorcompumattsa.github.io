@@ -1030,3 +1030,12 @@ body.tema-blue_glass .cat-event-banner .event-spark{color:#fff}
   .prod-card .prod-name{-webkit-line-clamp:3;max-height:39px}
   .prod-card .prod-desc{-webkit-line-clamp:3;max-height:36px;font-size:9.5px}
 }
+
+/* Controles PWA: instalación y compartir, añadidos sin cambiar las acciones existentes. */
+.btn-install,.btn-share-app{
+  background:linear-gradient(120deg,#102b5d,#157ee5);
+  color:#fff;border:1px solid #70dcff;
+  box-shadow:0 8px 20px rgba(20,119,214,.24);
+}
+.btn-share-app{background:linear-gradient(120deg,#0878b8,#13c7ff)}
+.btn-install:disabled{opacity:.8}

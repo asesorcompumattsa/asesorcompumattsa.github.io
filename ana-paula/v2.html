@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ana Paula | Compumatt — Tarjeta digital V2</title>
+<title>Ana Paula | Compumatt — Catálogo Compumatt</title>
 <meta name="description" content="Tarjeta digital futurista de Cristian en Compumatt: eventos, promociones, catálogo y WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Compumatt">
-<meta property="og:title" content="Ana Paula | Compumatt — Tarjeta digital">
-<meta property="og:description" content="Eventos, promociones, catálogo y contacto directo por WhatsApp.">
+<meta property="og:title" content="Ana Paula | Compumatt — Catálogo Compumatt">
+<meta property="og:description" content="Eventos, promociones, productos y contacto directo por WhatsApp.">
 <meta property="og:url" content="https://asesorcompumattsa.github.io/cristian/v2.html">
 <meta property="og:image" content="https://asesorcompumattsa.github.io/shared/logo-compumatt-transparent.png">
 <meta name="theme-color" content="#06122e">
@@ -21,6 +21,11 @@
   #catOverlay.show{visibility:visible;opacity:1}
 </style>
 <link rel="stylesheet" href="/shared/style.css?v=20261029-navigation-search1">
+<link rel="manifest" href="/ana-paula/manifest.json?v=1">
+<link rel="apple-touch-icon" href="/ana-paula/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Catálogo Compumatt">
 <style>
   :root{--v2-bg:#020817;--v2-panel:#071b3b;--v2-cyan:#13c7ff;--v2-blue:#1677e8;--v2-red:#f21f3f;--v2-text:#f5fbff;--v2-muted:#a6c5e4}
   html,body{min-height:100%;background:var(--v2-bg)}
@@ -79,6 +84,8 @@
       <button type="button" class="btn btn-red" id="openCatalog">📦 Ver catálogo completo</button>
       <div id="offersBanner" class="offers-banner" hidden role="button" tabindex="0" aria-label="Ver productos en oferta"><div class="offers-fire">🔥</div><div class="offers-copy"><strong>¡OFERTAS ESPECIALES!</strong><span>Descuentos por tiempo limitado</span></div><div class="offers-arrow">Ver ofertas&nbsp; →</div></div>
       <button type="button" class="btn btn-whatsapp-save" id="sendCatalogBtn">📲 Enviarme el catálogo por WhatsApp</button>
+      <button type="button" class="btn btn-install" id="installAppBtn">📲 Instalar Catálogo Compumatt</button>
+      <button type="button" class="btn btn-share-app" id="shareAppBtn">↗️ Compartir app</button>
     </div>
         <div class="phone">📞 &nbsp;Línea corporativa: <strong id="vendorPhone">+505 5728 6042</strong></div>
     <p class="foot">Compumatt de Nicaragua S.A.<br>Escanea, guarda o escribe — lo que necesites.</p>
@@ -91,5 +98,6 @@
 var NOMBRE="Ana Paula";var NOMBRE_COMPLETO="Ana Paula Morales Rueda";var ROL="Asesora de ventas";var TEL="+505 5728 6042";var WA="50557286042";
 </script>
 <script src="/shared/app.js?v=20261029-navigation-search1"></script>
+<script src="/ana-paula/pwa-install.js?v=1"></script>
 </body>
 </html>
