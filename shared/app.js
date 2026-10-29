@@ -90,6 +90,7 @@ iniciarAnalytics();
 
 var ICONOS = {impresora:"🖨",toner:"🔴",computo:"💻",accesorios:"🔌",oficina:"📂",servicios:"🛠️"};
 var todos = [], servicios = [], activeTab = "todos", cargado = false, serviciosCargados = false;
+var catalogHistoryActive = false;
 
 /* ══════════════════════════════════════════════════════════════════
    A PARTIR DE ACÁ: lógica general. No hace falta tocar nada de lo
@@ -213,6 +214,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
   function abrirCatalogoInicial(categoria){
     medir("abrir_catalogo", {modo: "desde_landing", categoria: categoria || "todos"});
+    if(!catalogHistoryActive){
+      history.pushState({compumattCatalog:true}, "", window.location.href);
+      catalogHistoryActive = true;
+    }
     catOverlay.classList.add("show");
     catSearch.value = "";
     activeTab = categoria || "todos";
@@ -232,19 +237,26 @@ document.addEventListener("DOMContentLoaded", function(){
     medir("abrir_servicios_tecnicos", {origen: "burbuja_flotante"});
     abrirCatalogoInicial("servicios");
   };
-  function cerrarCatalogo(){
+  function cerrarCatalogoInterno(){
     catOverlay.classList.remove("show");
     var sp = document.querySelector(".seasonParticles");
     if(sp) sp.style.display = "";
   }
+  function cerrarCatalogo(){
+    if(catalogHistoryActive){
+      catalogHistoryActive = false;
+      history.back();
+    } else cerrarCatalogoInterno();
+  }
+  window.addEventListener("popstate", function(){
+    catalogHistoryActive = false;
+    if(detOverlay && detOverlay.classList.contains("show")) detOverlay.classList.remove("show");
+    cerrarCatalogoInterno();
+  });
   if(catClose) catClose.onclick = cerrarCatalogo;
   if(catBack) catBack.onclick = cerrarCatalogo;
   if(catOverlay) catOverlay.onclick = function(e){
-    if(e.target===this){
-      this.classList.remove("show");
-      var sp = document.querySelector(".seasonParticles");
-      if(sp) sp.style.display = "";
-    }
+    if(e.target===this) cerrarCatalogo();
   };
   if(detOverlay) detOverlay.onclick = function(e){
     if(e.target===this) this.classList.remove("show");
@@ -441,15 +453,26 @@ function actualizarCabeceraServicios(){
   if(drawer) drawer.classList.toggle("services-mode",esServicios);
 }
 
+function normalizarBusqueda(valor){
+  return String(valor || "").toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9.]+/g, " ").replace(/\s+/g, " ").trim();
+}
+function coincideBusqueda(p, consulta){
+  if(!consulta) return true;
+  var texto=normalizarBusqueda([p.nom,p.desc,p.cat,p.pre,p.bdg].join(" "));
+  return consulta.split(" ").every(function(token){
+    return texto.includes(token) || texto.replace(/[.]/g, "").includes(token.replace(/[.]/g, ""));
+  });
+}
 function grid(){
-  var q=document.getElementById("catSearch").value.toLowerCase().trim();
+  var q=normalizarBusqueda(document.getElementById("catSearch").value);
   var fuente=activeTab==="servicios"?servicios:todos;
   var lista=fuente.filter(function(p){
     var perteneceATab = activeTab === "ofertas"
       ? p.bdg === "oferta"
       : (activeTab === "todos" || p.cat === activeTab || activeTab === "servicios");
-    return perteneceATab
-        &&(!q||p.nom.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));
+    return perteneceATab && coincideBusqueda(p,q);
   });
   var el=document.getElementById("catGrid");
   el.innerHTML="";
