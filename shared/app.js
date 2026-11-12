@@ -359,6 +359,18 @@ function gvizRows(raw){
   return rows;
 }
 
+var TASA_CORDOBAS = 36.6243;
+
+function precioEnCordobas(valor){
+  var original=String(valor||"").trim();
+  if(!original) return "";
+  var limpio=original.replace(/[^0-9.,-]/g, "");
+  if(!/[0-9]/.test(limpio)) return original;
+  var numero=parseFloat(limpio.replace(/,/g, ""));
+  if(!isFinite(numero)) return original;
+  return "C$ " + Math.round(numero*TASA_CORDOBAS).toLocaleString("en-US");
+}
+
 function parsear(filasCrudas){
   var filas = (filasCrudas||[]).filter(function(f){ return f && (f.length>1 || f[0]!==""); });
   if(filas.length < 2) return [];
@@ -382,7 +394,8 @@ function parsear(filasCrudas){
       cat  : cat.toLowerCase()||"otros",
       nom  : nom,
       desc : iDesc>=0?(c[iDesc]||"").trim():"",
-      pre  : iPre>=0?(c[iPre]||"").trim():"",
+      preRaw : iPre>=0?(c[iPre]||"").trim():"",
+      pre  : precioEnCordobas(iPre>=0?(c[iPre]||"").trim():""),
       img  : iImg>=0?(c[iImg]||"").trim():"",
       bdg  : iBdg>=0?(c[iBdg]||"").trim().toLowerCase().replace(/\s+/g," "):"",
       ico  : iIco>=0?(c[iIco]||"📦").trim():"📦",
@@ -414,7 +427,9 @@ function parsearServicios(filasCrudas){
     var act=iAct>=0?(c[iAct]||"").trim().toUpperCase():"SI";
     if(act==="NO" || act==="INACTIVO") continue;
     lista.push({cat:"servicios",nom:nom,desc:iDesc>=0?(c[iDesc]||"").trim():"",
-      pre:iPre>=0?(c[iPre]||"").trim():"Consultar",img:iImg>=0?(c[iImg]||"").trim():"",
+      preRaw:iPre>=0?(c[iPre]||"").trim():"Consultar",
+      pre:precioEnCordobas(iPre>=0?(c[iPre]||"").trim():"Consultar") || "Consultar",
+      img:iImg>=0?(c[iImg]||"").trim():"",
       bdg:"",ico:iIco>=0?(c[iIco]||"🛠️").trim():"🛠️"});
   }
   return lista;
@@ -460,7 +475,7 @@ function normalizarBusqueda(valor){
 }
 function coincideBusqueda(p, consulta){
   if(!consulta) return true;
-  var texto=normalizarBusqueda([p.nom,p.desc,p.cat,p.pre,p.bdg].join(" "));
+  var texto=normalizarBusqueda([p.nom,p.desc,p.cat,p.pre,p.preRaw,p.bdg].join(" "));
   return consulta.split(" ").every(function(token){
     return texto.includes(token) || texto.replace(/[.]/g, "").includes(token.replace(/[.]/g, ""));
   });
