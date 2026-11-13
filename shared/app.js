@@ -225,7 +225,29 @@ document.addEventListener("DOMContentLoaded", function(){
     if(!cargado) cargar(); else { tabs(); grid(); }
     var sp = document.querySelector(".seasonParticles");
     if(sp) sp.style.display = "none";
+    setTimeout(mostrarPromoBlackFriday, 180);
   }
+
+  function mostrarPromoBlackFriday(){
+    var promo=document.getElementById("blackFridayOverlay");
+    if(!promo) return;
+    promo.classList.add("show");
+    promo.setAttribute("aria-hidden","false");
+    var close=document.getElementById("blackFridayClose");
+    if(close) setTimeout(function(){close.focus();},80);
+    medir("ver_promocion_black_friday", {campana:"Tech-Evolution 2026"});
+  }
+  function cerrarPromoBlackFriday(){
+    var promo=document.getElementById("blackFridayOverlay");
+    if(!promo) return;
+    promo.classList.remove("show");
+    promo.setAttribute("aria-hidden","true");
+  }
+  var promoOverlay=document.getElementById("blackFridayOverlay");
+  var promoClose=document.getElementById("blackFridayClose");
+  if(promoClose) promoClose.onclick=function(){ cerrarPromoBlackFriday(); };
+  if(promoOverlay) promoOverlay.onclick=function(e){ if(e.target===promoOverlay) cerrarPromoBlackFriday(); };
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") cerrarPromoBlackFriday(); });
 
   if(openCatalog) openCatalog.onclick = function(){
     abrirCatalogoInicial("todos");
