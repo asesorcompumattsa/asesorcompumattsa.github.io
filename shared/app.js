@@ -225,7 +225,6 @@ document.addEventListener("DOMContentLoaded", function(){
     if(!cargado) cargar(); else { tabs(); grid(); }
     var sp = document.querySelector(".seasonParticles");
     if(sp) sp.style.display = "none";
-    setTimeout(mostrarPromoBlackFriday, 180);
   }
 
   function mostrarPromoBlackFriday(){
@@ -248,6 +247,9 @@ document.addEventListener("DOMContentLoaded", function(){
   if(promoClose) promoClose.onclick=function(){ cerrarPromoBlackFriday(); };
   if(promoOverlay) promoOverlay.onclick=function(e){ if(e.target===promoOverlay) cerrarPromoBlackFriday(); };
   document.addEventListener("keydown",function(e){ if(e.key==="Escape") cerrarPromoBlackFriday(); });
+
+  // La promoción aparece al iniciar la tarjeta, no al pulsar “Ver catálogo”.
+  setTimeout(mostrarPromoBlackFriday, 350);
 
   if(openCatalog) openCatalog.onclick = function(){
     abrirCatalogoInicial("todos");
